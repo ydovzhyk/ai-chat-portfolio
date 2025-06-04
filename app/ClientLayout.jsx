@@ -2,7 +2,7 @@
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import ChatWidget from './components/chat-widget/chatWidget'
+import ChatWidget from './components/chat-widget/ChatWidget'
 import Header from './components/header'
 import ScrollToTop from './components/helper/scroll-to-top'
 export default function ClientLayout({ children }) {
