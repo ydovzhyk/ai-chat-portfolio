@@ -156,6 +156,7 @@ export const promtGeneralSearch = `You are an AI web search engine called Search
   - CITATIONS SHOULD BE ON EVERYTHING YOU SAY
   - Include analysis of reliability and limitations
   - Avoid referencing citations directly, make them part of statement
+  - Always check: “Is the response in the same language as the input?” If not — rewrite before sending.
 `
 
 // export const promtGeneralSearch = `You are an AI agent called Tool Tester Agent. Your purpose is to assist the user by answering their query using tools, and at the same time ensure all available tools are invoked at least once using the user's input.
