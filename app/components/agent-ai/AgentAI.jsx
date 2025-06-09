@@ -1,61 +1,53 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { useChat } from 'ai/react'
+import { toast } from 'sonner'
 import ReactMarkdown from 'react-markdown'
 import { CiSearch } from 'react-icons/ci'
 import { TfiClose } from 'react-icons/tfi'
 import Image from 'next/image'
 
-const Dots = () => {
-  return (
-    <span className="flex items-center gap-2 text-gray-400">
-      <span className="text-sm font-extralight">Searching the web</span>
-      <span className="dot">.</span>
-      <span className="dot delay-150">.</span>
-      <span className="dot delay-300">.</span>
-
-      <style jsx>{`
-        .dot {
-          animation: blink 1.5s infinite;
+const Dots = () => (
+  <span className="flex items-center gap-2 text-gray-400">
+    <span className="text-sm font-extralight">Searching the web</span>
+    <span className="dot">.</span>
+    <span className="dot delay-150">.</span>
+    <span className="dot delay-300">.</span>
+    <style jsx>{`
+      .dot {
+        animation: blink 1.5s infinite;
+      }
+      .delay-150 {
+        animation-delay: 0.2s;
+      }
+      .delay-300 {
+        animation-delay: 0.4s;
+      }
+      @keyframes blink {
+        0%,
+        80%,
+        100% {
+          opacity: 0;
         }
-
-        .delay-150 {
-          animation-delay: 0.2s;
+        40% {
+          opacity: 1;
         }
-
-        .delay-300 {
-          animation-delay: 0.4s;
-        }
-
-        @keyframes blink {
-          0%,
-          80%,
-          100% {
-            opacity: 0;
-          }
-          40% {
-            opacity: 1;
-          }
-        }
-
-        .perspective {
-          perspective: 600px;
-        }
-      `}</style>
-    </span>
-  )
-}
+      }
+    `}</style>
+  </span>
+)
 
 export default function AgentAI({ className = '' }) {
-  const [prompt, setPrompt] = useState('')
-  const [reply, setReply] = useState('')
-  const [loading, setLoading] = useState(false)
   const [userId, setUserId] = useState('')
-  const [suggestions, setSuggestions] = useState([])
   const [placeholder, setPlaceholder] = useState('')
   const [showPanel, setShowPanel] = useState(false)
+  const [manuallyClosed, setManuallyClosed] = useState(false)
+  const [suggestions, setSuggestions] = useState([])
+  const [isStreamingFinished, setIsStreamingFinished] = useState(false)
   const [screenHeight, setScreenHeight] = useState(0)
-
+  const [chatKey, setChatKey] = useState(0)
+  const replyRef = useRef(null)
   const examples = [
     'etc. Ask me about ydovzhyk.com',
     'etc. Who is Yuriy Dovzhyk?',
@@ -82,56 +74,123 @@ export default function AgentAI({ className = '' }) {
   useEffect(() => {
     const updateHeight = () => setScreenHeight(window.innerHeight)
     updateHeight()
-
     window.addEventListener('resize', updateHeight)
     return () => window.removeEventListener('resize', updateHeight)
   }, [])
 
-  const handleSubmit = async () => {
-    if (!prompt.trim() || !userId) return
-    setLoading(true)
-    setReply('')
-    setShowPanel(false)
+  useEffect(() => {
+    if (replyRef.current) {
+      replyRef.current.scrollTop = replyRef.current.scrollHeight
+    }
+  }, [])
 
+  const fetchSuggestions = async () => {
     try {
-      const [responseGeneralSearch, responseSuggestions] = await Promise.all([
-        fetch('/api/agent-ai', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt, userId }),
-        }),
-        fetch('/api/agent-ai/suggestions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId }),
-        }),
-      ])
-
-      const [dataGeneralSearch, dataSuggestions] = await Promise.all([
-        responseGeneralSearch.json(),
-        responseSuggestions.json(),
-      ])
-
-      setReply(dataGeneralSearch.reply)
-
-      if (Array.isArray(dataSuggestions.questions)) {
-        setSuggestions(dataSuggestions.questions)
+      const res = await fetch('/api/agent-ai/suggestions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId }),
+      })
+      const data = await res.json()
+      if (Array.isArray(data.questions)) {
+        setSuggestions(data.questions)
       }
     } catch (err) {
-      console.error('❌ Error in handleSubmit:', err)
-      setReply('⚠️ An error occurred.')
-    } finally {
-      setShowPanel(true)
-      setLoading(false)
+      console.error('❌ Error fetching suggestions:', err)
     }
   }
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSubmit()
+  const chatOptions = useMemo(
+    () => ({
+      api: '/api/agent-ai-stream',
+      body: {
+        user_id: userId,
+      },
+      maxSteps: 5,
+      experimental_throttle: 100,
+      onFinish: async (message, { finishReason }) => {
+        if (
+          message.content &&
+          (finishReason === 'stop' || finishReason === 'length')
+        ) {
+          setIsStreamingFinished(true)
+        }
+      },
+      onError: (error) => {
+        console.error('Chat error:', error.cause, error.message)
+        toast.error('An error occurred.', {
+          description: `Oops! An error occurred while processing your request. ${error.message}`,
+        })
+      },
+    }),
+    [userId]
+  )
+
+  const {
+    messages,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    input,
+    setInput,
+  } = useChat({
+    ...chatOptions,
+    key: `chat-${chatKey}`,
+  })
+
+
+  const replyMessage = useMemo(() => {
+    const lastAssistantMessage = [...messages]
+      .reverse()
+      .find((m) => m.role === 'assistant')
+    return lastAssistantMessage?.content || ''
+  }, [messages])
+
+    // useEffect(() => {
+    //   if (!showPanel && !manuallyClosed) {
+    //     const assistantMessage = messages.find(
+    //       (m) => m.role === 'assistant' && m.content?.trim()
+    //     )
+    //     if (assistantMessage) {
+    //       setShowPanel(true)
+    //     }
+    //   }
+  // }, [messages, showPanel, manuallyClosed])
+
+  useEffect(() => {
+    const lastAssistantMessage = messages[messages.length - 1]
+    if (
+      lastAssistantMessage?.role === 'assistant' &&
+      lastAssistantMessage?.content?.trim() &&
+      !manuallyClosed
+    ) {
+      setShowPanel(true)
     }
-  }
+  }, [messages, manuallyClosed])
+
+    useEffect(() => {
+      if (showPanel) {
+        fetchSuggestions()
+      }
+    }, [showPanel])
+
+    // const handleKeyDown = (e) => {
+    //   if (e.key === 'Enter' && !e.shiftKey) {
+    //     e.preventDefault()
+    //     setManuallyClosed(false)
+    //     handleSubmit({
+    //       messages: [{ role: 'user', content: input }],
+    //       options: {
+    //         body: {
+    //           user_id: userId,
+    //         },
+    //       },
+    //     })
+    //   }
+  // }
+
+  console.log('input:', input)
+  console.log('messages:', messages)
 
   return (
     <>
@@ -139,23 +198,49 @@ export default function AgentAI({ className = '' }) {
         className={`relative ${className} flex items-center justify-center w-full sm:w-[380px]`}
       >
         <textarea
-          value={loading ? '' : prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder={loading ? '' : placeholder}
-          disabled={loading}
+          value={isLoading ? '' : input}
+          onChange={handleInputChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault()
+              if (!input.trim()) return
+              setManuallyClosed(false)
+              handleSubmit({
+                messages: [{ role: 'user', content: input }],
+                options: { body: { user_id: userId } },
+              })
+              setChatKey((prev) => prev + 1)
+            }
+          }}
+          placeholder={isLoading ? '' : placeholder}
+          disabled={isLoading}
           rows={1}
           className="w-full sm:w-[380px] min-h-[40px] bg-[#221a4a00] rounded-md border border-neutral-700 pt-[9px] pb-2 pl-2 pr-10 text-sm text-white placeholder-gray-400 placeholder:font-extralight focus:outline-none focus:ring-2 focus:ring-pink-500 custom-scroll mb-[-6px]"
         />
 
-        {loading && (
+        {isLoading && (
           <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-white text-sm mt-[2px]">
             <Dots />
           </div>
         )}
         <button
           type="button"
-          onClick={handleSubmit}
+          onClick={() => {
+            if (!input.trim()) return
+
+            setShowPanel(false)
+            setManuallyClosed(false)
+
+            handleSubmit({
+              messages: [{ role: 'user', content: input }],
+              options: {
+                body: {
+                  user_id: userId,
+                },
+              },
+            })
+            setChatKey((prev) => prev + 1)
+          }}
           className="absolute right-4 top-1/2 -translate-y-1/2 transition text-gray-400 hover:text-pink-400"
         >
           <div className="relative flex items-center justify-center mt-[5px]">
@@ -175,10 +260,8 @@ export default function AgentAI({ className = '' }) {
                 <TfiClose
                   size={20}
                   onClick={() => {
+                    setManuallyClosed(true)
                     setShowPanel(false)
-                    setPrompt('')
-                    setReply('')
-                    setSuggestions([])
                   }}
                 />
               </div>
@@ -196,6 +279,7 @@ export default function AgentAI({ className = '' }) {
               </div>
 
               <div
+                ref={replyRef}
                 className="flex-1 overflow-y-auto border border-neutral-700 shadow-lg rounded p-4 custom-scroll text-gray-200 text-sm font-extralight"
                 style={{
                   backgroundImage: "url('/section.svg')",
@@ -224,7 +308,7 @@ export default function AgentAI({ className = '' }) {
                     ),
                   }}
                 >
-                  {reply}
+                  {replyMessage}
                 </ReactMarkdown>
               </div>
 
@@ -232,7 +316,10 @@ export default function AgentAI({ className = '' }) {
                 {suggestions.map((question, idx) => (
                   <div
                     key={idx}
-                    onClick={() => setPrompt(question)}
+                    onClick={() => {
+                      if (!isStreamingFinished) return
+                      setInput(question)
+                    }}
                     className="cursor-pointer group bg-gradient-to-r from-violet-600 to-pink-500 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
                     style={{ flex: '1 1 300px', maxWidth: '100%' }}
                   >
@@ -257,7 +344,6 @@ export default function AgentAI({ className = '' }) {
           background: linear-gradient(to bottom, #ec4899, #8b5cf6);
           border-radius: 10px;
         }
-
         @keyframes fade-in-up {
           from {
             transform: translate(-50%, -20px);
@@ -275,4 +361,3 @@ export default function AgentAI({ className = '' }) {
     </>
   )
 }
-
