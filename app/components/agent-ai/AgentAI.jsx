@@ -46,8 +46,11 @@ export default function AgentAI({ className = '' }) {
   const [suggestions, setSuggestions] = useState([])
   const [isStreamingFinished, setIsStreamingFinished] = useState(false)
   const [screenHeight, setScreenHeight] = useState(0)
+  const [panelTop, setPanelTop] = useState(0)
   const [chatKey, setChatKey] = useState(0)
   const replyRef = useRef(null)
+  const textareaRef = useRef(null)
+  const inputWrapperRef = useRef(null)
   const examples = [
     'etc. Ask me about ydovzhyk.com',
     'etc. Who is Yuriy Dovzhyk?',
@@ -86,7 +89,7 @@ export default function AgentAI({ className = '' }) {
 
   const fetchSuggestions = async () => {
     try {
-      const res = await fetch('/api/agent-ai/suggestions', {
+      const res = await fetch('/api/suggestions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId }),
@@ -128,6 +131,7 @@ export default function AgentAI({ className = '' }) {
 
   const {
     messages,
+    setMessages,
     handleInputChange,
     handleSubmit,
     isLoading,
@@ -138,24 +142,12 @@ export default function AgentAI({ className = '' }) {
     key: `chat-${chatKey}`,
   })
 
-
   const replyMessage = useMemo(() => {
     const lastAssistantMessage = [...messages]
       .reverse()
       .find((m) => m.role === 'assistant')
     return lastAssistantMessage?.content || ''
   }, [messages])
-
-    // useEffect(() => {
-    //   if (!showPanel && !manuallyClosed) {
-    //     const assistantMessage = messages.find(
-    //       (m) => m.role === 'assistant' && m.content?.trim()
-    //     )
-    //     if (assistantMessage) {
-    //       setShowPanel(true)
-    //     }
-    //   }
-  // }, [messages, showPanel, manuallyClosed])
 
   useEffect(() => {
     const lastAssistantMessage = messages[messages.length - 1]
@@ -168,54 +160,67 @@ export default function AgentAI({ className = '' }) {
     }
   }, [messages, manuallyClosed])
 
-    useEffect(() => {
-      if (showPanel) {
-        fetchSuggestions()
+  useEffect(() => {
+    if (showPanel) {
+      fetchSuggestions()
+    }
+  }, [showPanel])
+
+  useEffect(() => {
+    const updatePanelPosition = () => {
+      if (inputWrapperRef.current) {
+        const rect = inputWrapperRef.current.getBoundingClientRect()
+        setPanelTop(rect.bottom - 65)
       }
-    }, [showPanel])
+    }
 
-    // const handleKeyDown = (e) => {
-    //   if (e.key === 'Enter' && !e.shiftKey) {
-    //     e.preventDefault()
-    //     setManuallyClosed(false)
-    //     handleSubmit({
-    //       messages: [{ role: 'user', content: input }],
-    //       options: {
-    //         body: {
-    //           user_id: userId,
-    //         },
-    //       },
-    //     })
-    //   }
-  // }
+    autoResize()
+    updatePanelPosition()
 
-  console.log('input:', input)
-  console.log('messages:', messages)
+    window.addEventListener('resize', updatePanelPosition)
+    return () => window.removeEventListener('resize', updatePanelPosition)
+  }, [input])
+
+  const autoResize = () => {
+    const el = textareaRef.current
+    if (el) {
+      el.style.height = 'auto'
+      el.style.height = el.scrollHeight + 'px'
+    }
+  }
 
   return (
-    <>
+    <div className="w-full flex items-center justify-center relative">
       <div
+        ref={inputWrapperRef}
         className={`relative ${className} flex items-center justify-center w-full sm:w-[380px]`}
       >
         <textarea
+          ref={textareaRef}
           value={isLoading ? '' : input}
-          onChange={handleInputChange}
+          onChange={(e) => {
+            handleInputChange(e)
+            autoResize()
+          }}
           onKeyDown={(e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault()
               if (!input.trim()) return
+
+              setShowPanel(false)
               setManuallyClosed(false)
+
               handleSubmit({
                 messages: [{ role: 'user', content: input }],
-                options: { body: { user_id: userId } },
               })
+              setMessages([])
               setChatKey((prev) => prev + 1)
             }
           }}
           placeholder={isLoading ? '' : placeholder}
           disabled={isLoading}
           rows={1}
-          className="w-full sm:w-[380px] min-h-[40px] bg-[#221a4a00] rounded-md border border-neutral-700 pt-[9px] pb-2 pl-2 pr-10 text-sm text-white placeholder-gray-400 placeholder:font-extralight focus:outline-none focus:ring-2 focus:ring-pink-500 custom-scroll mb-[-6px]"
+          className="w-full sm:w-[380px] min-h-[40px] resize-none bg-[#221a4a00] rounded-md border border-neutral-700 pt-[9px] pb-2 pl-2 pr-10 text-sm text-white placeholder-gray-400 placeholder:font-extralight focus:outline-none focus:ring-2 focus:ring-pink-500 custom-scroll mb-[-6px]"
         />
 
         {isLoading && (
@@ -239,6 +244,7 @@ export default function AgentAI({ className = '' }) {
                 },
               },
             })
+            setMessages([])
             setChatKey((prev) => prev + 1)
           }}
           className="absolute right-4 top-1/2 -translate-y-1/2 transition text-gray-400 hover:text-pink-400"
@@ -250,7 +256,10 @@ export default function AgentAI({ className = '' }) {
       </div>
 
       {showPanel && (
-        <div className="fixed left-1/2 top-[140px] md:w-[70vw] lg:w-[50vw] w-full -translate-x-1/2 z-60 opacity-0 animate-fade-in-up px-6 sm:px-0">
+        <div
+          className="absolute left-1/2 md:w-[70vw] lg:w-[50vw] w-full -translate-x-1/2 z-60 opacity-0 animate-fade-in-up sm:px-0"
+          style={{ top: panelTop }}
+        >
           <div className="w-full bg-[#0D1224] rounded-md border border-neutral-700 shadow-lg">
             <div
               className="w-full flex flex-col gap-6 relative bg-no-repeat bg-[length:100%_100%] bg-bottom p-6"
@@ -358,6 +367,6 @@ export default function AgentAI({ className = '' }) {
           animation: fade-in-up 0.4s ease-out forwards;
         }
       `}</style>
-    </>
+    </div>
   )
 }

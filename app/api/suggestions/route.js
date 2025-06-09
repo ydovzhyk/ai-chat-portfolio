@@ -3,7 +3,7 @@ import { openai } from '@ai-sdk/openai'
 import MemoryClient from 'mem0ai'
 import { z } from 'zod'
 import { generateObject } from 'ai'
-import { promtAskQuestions } from '../../../../utils/data/promtAskQuestions'
+import { promtAskQuestions } from '../../../utils/data/promtAskQuestions'
 
 const mem0 = new MemoryClient({ apiKey: process.env.MEM0_API_KEY })
 
