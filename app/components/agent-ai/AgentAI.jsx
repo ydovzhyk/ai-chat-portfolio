@@ -335,6 +335,14 @@ export default function AgentAI({ className = '' }) {
                     onClick={() => {
                       if (!isStreamingFinished) return
                       setInput(question)
+
+                      setTimeout(() => {
+                        if (inputWrapperRef.current) {
+                          const rect =
+                            inputWrapperRef.current.getBoundingClientRect()
+                          setPanelTop(rect.bottom - 65)
+                        }
+                      }, 10)
                     }}
                     className="cursor-pointer group bg-gradient-to-r from-violet-600 to-pink-500 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
                     style={{ flex: '1 1 300px', maxWidth: '100%' }}
