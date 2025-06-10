@@ -128,9 +128,6 @@ export default function AgentAI({ className = '' }) {
         ) {
           setIsStreamingFinished(true)
         }
-        if (suggestions.length === 0) {
-          await fetchSuggestions()
-        }
       },
       onError: (error) => {
         console.error('Chat error:', error.cause, error.message)
@@ -209,7 +206,6 @@ export default function AgentAI({ className = '' }) {
       sessionStorage.setItem('usedQuestions', JSON.stringify(used))
     }
   }
-
 
   return (
     <div className="w-full flex items-center justify-center relative">
