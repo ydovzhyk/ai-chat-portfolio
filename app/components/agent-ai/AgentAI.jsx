@@ -96,10 +96,13 @@ export default function AgentAI({ className = '' }) {
 
   const fetchSuggestions = async () => {
     try {
+      const usedQuestions = await JSON.parse(
+        sessionStorage.getItem('usedQuestions') || '[]'
+      )
       const res = await fetch('/api/suggestions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ userId, usedQuestions }),
       })
       const data = await res.json()
       if (Array.isArray(data.questions)) {
@@ -196,6 +199,15 @@ export default function AgentAI({ className = '' }) {
     }
   }
 
+  const saveUsedQuestion = (question) => {
+    const used = JSON.parse(sessionStorage.getItem('usedQuestions') || '[]')
+    if (!used.includes(question)) {
+      used.push(question)
+      sessionStorage.setItem('usedQuestions', JSON.stringify(used))
+    }
+  }
+
+
   return (
     <div className="w-full flex items-center justify-center relative">
       <div
@@ -220,6 +232,7 @@ export default function AgentAI({ className = '' }) {
               handleSubmit({
                 messages: [{ role: 'user', content: input }],
               })
+              saveUsedQuestion(input)
               setMessages([])
               setChatKey((prev) => prev + 1)
             }
@@ -251,6 +264,7 @@ export default function AgentAI({ className = '' }) {
                 },
               },
             })
+            saveUsedQuestion(input)
             setMessages([])
             setChatKey((prev) => prev + 1)
           }}
