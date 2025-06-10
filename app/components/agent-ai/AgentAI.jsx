@@ -128,6 +128,9 @@ export default function AgentAI({ className = '' }) {
         ) {
           setIsStreamingFinished(true)
         }
+        if (suggestions.length === 0) {
+          await fetchSuggestions()
+        }
       },
       onError: (error) => {
         console.error('Chat error:', error.cause, error.message)
