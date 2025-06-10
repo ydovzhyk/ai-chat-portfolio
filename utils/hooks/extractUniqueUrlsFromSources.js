@@ -12,8 +12,6 @@ export default function extractUniqueUrlsFromSources(
   // console.log('prompt', prompt)
   // console.log('exactUrl', exactUrl)
   // console.log('memSearch', memSearch)
-
-
   function extractUrlsFromText(text) {
     const urlRegex = /https?:\/\/[^\s"']+/g
     return [...new Set(text.match(urlRegex) || [])]

@@ -15,7 +15,6 @@ export async function POST(req) {
   const usedQuestionsText = usedQuestions.length
     ? usedQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')
     : ''
-    console.log('usedQuestionsText:', usedQuestionsText)
 
 const promtAskQuestions = `You are a search engine query/questions generator. You MUST create EXACTLY 2 questions for the search engine based on the message history.
 
