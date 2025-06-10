@@ -99,7 +99,7 @@ export default function AgentAI({ className = '' }) {
       const usedQuestions = await JSON.parse(
         sessionStorage.getItem('usedQuestions') || '[]'
       )
-      const res = await fetch('/api/suggestions', {
+      const res = await fetch('/api/additional-questions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, usedQuestions }),
