@@ -35,10 +35,6 @@ function ContactForm() {
     try {
       const origin = typeof window !== 'undefined' ? window.location.origin : ''
       setIsLoading(true);
-      // await axios.post(
-      //   `${process.env.NEXT_PUBLIC_APP_URL}/api/contact`,
-      //   userInput
-      // );
       await axios.post(`${origin}/api/contact`, userInput);
 
       toast.success("Message sent successfully!");
