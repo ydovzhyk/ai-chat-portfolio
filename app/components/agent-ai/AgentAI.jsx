@@ -356,6 +356,7 @@ export default function AgentAI({ className = '' }) {
                           setPanelTop(rect.bottom - 65)
                         }
                       }, 10)
+                      setShowPanel(false)
                     }}
                     className="cursor-pointer group bg-gradient-to-r from-violet-600 to-pink-500 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
                     style={{ flex: '1 1 300px', maxWidth: '100%' }}
