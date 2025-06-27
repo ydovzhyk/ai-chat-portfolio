@@ -53,16 +53,7 @@ export default function AgentAI({ className = '' }) {
   const inputWrapperRef = useRef(null)
   const examples = [
     'etc. Ask me about ydovzhyk.com',
-    'etc. Who is Yuriy Dovzhyk?',
-    'etc. Explore projects like BlueHouse',
-    'etc. What is SpeechFlow?',
-    'etc. What is the MiddleWay school website?',
-    'etc. What is EasyShop project?',
-    'etc. Tell me about the BookingApart site',
-    'etc. Review the site bookingapart.netlify.app',
-    'etc. View the site https://asdental.org/en/',
-    'etc. Show details of BlueHouse housing page',
-    'etc. What is the stack of SpeechFlow project?',
+    'etc. View the site https://asdental.org',
     'etc. What is ydovzhyk GitHub?',
   ]
 

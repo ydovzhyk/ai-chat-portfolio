@@ -69,7 +69,7 @@ export const projectsData = [
       'Built a commercial website for a private school and kindergarten from scratch. All design and content were aligned with the client. The responsive frontend is SEO-optimized. Backend includes admin mode for managing appointments, feedback, events, and authentication. Features trial visit booking, contact form, and event creation. Integrated SendGrid, Twilio, and Firebase. Development is ongoing.',
     frontendGitLink: 'https://github.com/ydovzhyk/middle-way-copy',
     backendGitLink: 'https://github.com/ydovzhyk/middleway-backend-copy',
-    demo: 'https://middleway.in.ua/',
+    demo: 'https://middleway-in-ua.netlify.app/',
     ready: true,
   },
   {

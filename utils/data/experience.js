@@ -23,7 +23,7 @@ export const experiences = [
     company: 'Freelance',
     duration: 'apr 2024 - nov 2024',
     projects: ['Art Studio Dental', 'Middle Way'],
-    links: ['https://asdental.org/', 'https://middleway.in.ua/'],
+    links: ['https://asdental.org/', 'https://middleway-in-ua.netlify.app/'],
     notReady: [''],
   },
   {
