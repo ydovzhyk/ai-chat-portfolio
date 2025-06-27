@@ -53,7 +53,7 @@ export default function AgentAI({ className = '' }) {
   const inputWrapperRef = useRef(null)
   const examples = [
     'etc. Ask me about ydovzhyk.com',
-    'etc. View the site https://asdental.org',
+    'etc. View the site asdental.org',
     'etc. What is ydovzhyk GitHub?',
   ]
 
@@ -68,8 +68,14 @@ export default function AgentAI({ className = '' }) {
   }, [])
 
   useEffect(() => {
-    const randomExample = examples[Math.floor(Math.random() * examples.length)]
-    setPlaceholder(randomExample)
+    let index = 0
+    const interval = setInterval(() => {
+      setPlaceholder(examples[index])
+      index = (index + 1) % examples.length
+    }, 15000)
+
+    setPlaceholder(examples[0])
+    return () => clearInterval(interval)
   }, [])
 
   useEffect(() => {
