@@ -43,7 +43,7 @@ export const projectsData = [
     role: 'Frontend Developer',
     description:
       'Designed and built a fully functional, multilingual website for a real dental clinic from scratch, without using any templates. The design and content were closely coordinated with the client. Focused on responsiveness, clean design, and SEO optimization. Implemented React Helmet for meta management and integrated Google Analytics. The site is actively maintained and live in production.',
-    frontendGitLink: 'https://asdental.org/en',
+    frontendGitLink: 'https://github.com/ydovzhyk/art-studio-dental',
     backendGitLink: '',
     demo: 'https://asdental.org/',
     ready: true,
