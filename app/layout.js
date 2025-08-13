@@ -1,4 +1,5 @@
 import { GoogleTagManager } from '@next/third-parties/google'
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Inter } from 'next/font/google'
 import 'react-toastify/dist/ReactToastify.css'
 import ClientLayout from './ClientLayout'
@@ -42,6 +43,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <ClientLayout>{children}</ClientLayout>
         <Footer />
+        <SpeedInsights />
       </body>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
     </html>
