@@ -43,9 +43,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <ClientLayout>{children}</ClientLayout>
         <Footer />
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
         <SpeedInsights />
       </body>
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
     </html>
   )
 }
