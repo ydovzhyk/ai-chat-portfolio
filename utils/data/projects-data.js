@@ -1,6 +1,29 @@
 export const projectsData = [
   {
     id: 1,
+    name: 'PinkSkirt',
+    shotName: 'PinkSkirt',
+    tools: [
+      'Next.js',
+      'React',
+      'Redux',
+      'Tailwind CSS',
+      'Axios',
+      'Firebase (Firestore, Storage)',
+      'Next.js API Routes',
+      'Google Analytics 4',
+      'Vercel Speed Insights',
+    ],
+    role: 'Full Stack Developer',
+    description:
+      'Production website for a bespoke women’s clothing atelier. Built an admin area to create, edit, and delete ready-made products, studio stories, fabrics, and models. Data is stored in Firebase (Firestore + Storage). Implemented currency conversion (GBP default; EUR/PLN/UAH/USD), responsive UI, and lazy-loaded images. Configured SEO (meta/OG), GA4, and Vercel Speed Insights. The owner can manage content independently without developer involvement.',
+    frontendGitLink: 'https://github.com/ydovzhyk/pink-skirt',
+    backendGitLink: '',
+    demo: 'https://pinkskirt.uk',
+    ready: true,
+  },
+  {
+    id: 2,
     name: 'BlueHouse',
     shotName: 'BlueHouse',
     tools: ['React', 'Redux', 'Sass', 'Webpack'],
@@ -13,7 +36,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 2,
+    id: 3,
     name: 'SpeakFlow',
     shotName: 'SpeakFlow',
     tools: [
@@ -36,7 +59,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 3,
+    id: 4,
     name: 'Art Studio Dental',
     shotName: 'Art Studio Dental',
     tools: ['React', 'Redux', 'Sass', 'React I18next', 'React Helmet'],
@@ -49,7 +72,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 4,
+    id: 5,
     name: 'Middle Way',
     shotName: 'Middle Way',
     tools: [
@@ -73,7 +96,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 5,
+    id: 6,
     name: 'Booking Apartment',
     shotName: 'Booking Apartment',
     tools: [
@@ -100,7 +123,7 @@ export const projectsData = [
     ready: false,
   },
   {
-    id: 6,
+    id: 7,
     name: 'Easy-Shop',
     shotName: 'Easy-Shop',
     tools: [
@@ -126,7 +149,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 7,
+    id: 8,
     name: 'Notes Organizer',
     shotName: 'Notes Organizer',
     tools: [
@@ -148,7 +171,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 8,
+    id: 9,
     name: 'Slim Mom',
     shotName: 'Slim Mom',
     role: 'Full Stack Developer',
@@ -170,7 +193,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 9,
+    id: 10,
     name: 'Kapu$ta',
     shotName: 'Kapu$ta',
     description:
@@ -191,7 +214,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 10,
+    id: 11,
     name: 'Event Booster',
     shotName: 'Event Booster',
     tools: ['HTML', 'SASS', 'JavaScript', 'REST API'],

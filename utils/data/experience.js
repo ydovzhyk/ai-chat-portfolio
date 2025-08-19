@@ -2,6 +2,15 @@ export const experiences = [
   {
     id: 1,
     title: 'Full Stack Developer',
+    company: 'PinkSkirt',
+    duration: 'Jul 2025 - Aug 2025',
+    projects: ['PinkSkirt'],
+    links: ['https://pinkskirt.uk/'],
+    notReady: [''],
+  },
+  {
+    id: 2,
+    title: 'Full Stack Developer',
     company: 'Siciliamia',
     duration: 'nov 2024 - jan 2025',
     projects: ['BlueHouse'],
@@ -9,7 +18,7 @@ export const experiences = [
     notReady: [''],
   },
   {
-    id: 2,
+    id: 3,
     title: 'Full Stack Developer',
     company: 'Self-initiated Project',
     duration: 'sep 2024 – present',
@@ -18,7 +27,7 @@ export const experiences = [
     notReady: [''],
   },
   {
-    id: 3,
+    id: 4,
     title: 'Full Stack Developer',
     company: 'Freelance',
     duration: 'apr 2024 - nov 2024',
@@ -27,7 +36,7 @@ export const experiences = [
     notReady: [''],
   },
   {
-    id: 4,
+    id: 5,
     title: 'Self Employed',
     company: 'Code and build something in everyday.',
     duration: 'feb 2023 - present',
