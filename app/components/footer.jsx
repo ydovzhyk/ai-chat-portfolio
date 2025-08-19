@@ -31,7 +31,7 @@ function Footer() {
               />
             </Link>
           </div>
-          <p className="text-sm">Updated August 2025</p>
+          <p className="text-sm">Updated Aug 2025</p>
         </div>
       </div>
     </div>
