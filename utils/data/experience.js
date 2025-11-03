@@ -23,7 +23,7 @@ export const experiences = [
     company: 'Self-initiated Project',
     duration: 'sep 2024 – present',
     projects: ['SpeakFlow'],
-    links: ['https://speakflow.netlify.app/'],
+    links: ['https://speakflow.space/'],
     notReady: [''],
   },
   {
@@ -53,7 +53,7 @@ export const experiences = [
       'https://easy-shop-team.netlify.app/',
       'https://notes-organiser-yd.netlify.app/',
       'https://ydovzhyk.github.io/frontend-slimmom/',
-      'https://ydovzhyk.github.io/frontend-kapusta-dev/#/login',
+      'https://ydovzhyk.github.io/frontend-kapusta-dev/',
       'https://ydovzhyk.github.io/eventbooster_team_project/',
     ],
     notReady: ['Booking Apartment'],

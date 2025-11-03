@@ -32,7 +32,8 @@ export const projectsData = [
       'Refactored the existing website codebase, fixing legacy bugs and outdated logic. Developed apartment listing and payment pages from scratch. Added responsive layouts for mobile and tablet. Improved SEO — PageSpeed Insights averaged 98%. Integrated structured data and meta tags for search visibility. Helped set up the GitHub repo and documented collaboration guidelines. Met with designers to review the Figma template and align on fixes. The project was approved by the company owner.',
     frontendGitLink: 'https://github.com/ydovzhyk/BlueHouse',
     backendGitLink: '',
-    demo: 'https://bluehouse-bb.netlify.app',
+    demo: 'https://bluehouse-bb.netlify.app/',
+    originalSite: 'https://bluehouse.is/',
     ready: true,
   },
   {

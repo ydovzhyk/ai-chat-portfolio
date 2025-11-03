@@ -26,7 +26,7 @@ Key Projects:
 - Frontend: Next.js + React with Tailwind CSS and Redux for state management. Implemented serverless API routes and Axios for data operations. Configured SEO (meta/OG), structured data, and performance monitoring with Google Analytics 4 and Vercel Speed Insights.
 - Data & Storage: Firebase (Firestore + Storage) for data and media.
 - Source:
-[Live Demo](https://pinkskirt.uk)
+[Live Demo](https://pinkskirt.uk/)
 [Frontend GitHub](https://github.com/ydovzhyk/pink-skirt)
 
 2. **BlueHouse** – Reykjavik apartment rental website (Frontend Developer, Nov 2024 – Jan 2025, internship at Siciliamia)
@@ -34,7 +34,8 @@ Key Projects:
 - Frontend: Built with React and Redux for state management. Refactored outdated logic, fixed legacy bugs, and implemented new pages including apartment listings and payment flow. Used Sass for styling and Webpack for bundling. Ensured full responsiveness across desktop, tablet, and mobile. SEO was improved via React Helmet, meta tag adjustments, and structured data.
 Additional Contributions: Achieved a PageSpeed Insights score averaging 98%, significantly improving performance. Integrated SEO best practices including Open Graph and Schema.org markup. Helped initialize the GitHub repository and contributed to documentation. Collaborated with the design team to align implementation with the Figma design system.
 - Source:
-[Live Demo](https://bluehouse-bb.netlify.app)
+[Live Demo](https://bluehouse-bb.netlify.app/)
+[Original Site](https://bluehouse.is/)
 [Frontend GitHub](https://github.com/ydovzhyk/BlueHouse)
 
 3. **SpeakFlow** – Real-time AI voice translation app (Full Stack Developer, 2024 – ongoing, personal project)
@@ -43,7 +44,7 @@ Additional Contributions: Achieved a PageSpeed Insights score averaging 98%, sig
 - Backend: Created with Node.js and Express, using MongoDB for persistent storage. Integrated the Deepgram SDK for fast and accurate speech-to-text transcription and OpenAI GPT-4 for high-quality translations. Used JWT for secure authentication and bcrypt for password encryption. APIs were developed for user session management and saving translation history.
 - Innovations: Enabled automatic detection and dynamic switching between audio sources (microphone and system output). WebSocket implementation ensures continuous real-time data flow with minimal delay.
 - Source:
-[Live Demo](https://speakflow.netlify.app)
+[Live Demo](https://speakflow.space/)
 [Frontend GitHub](https://github.com/ydovzhyk/SpeakFlow)
 [Backend GitHub](https://github.com/ydovzhyk/test-task-backend)
 
@@ -52,7 +53,7 @@ Additional Contributions: Achieved a PageSpeed Insights score averaging 98%, sig
 - Frontend: Built with React and Redux for structured state management. Implemented secure API communication using Axios with interceptors and token refresh logic. Used React Hook Form for dynamic forms and React Helmet for meta tag management. Added structured data with Schema.org, sitemap.xml, and robots.txt. SEO performance was validated via Google Search Console.
 - Backend: Created with Node.js and Express, using MongoDB for data persistence. Implemented user authentication and authorization with JWT (including refresh tokens) and password encryption with bcrypt. Used Joi for input validation and Multer + Firebase for photo upload and secure storage. Set up event and feedback management, trial booking logic, and notification services via SendGrid (email) and Twilio (SMS).
 - Source:
-[Live Demo](https://middleway.in.ua)
+[Live Demo](https://middleway-in-ua.netlify.app/)
 [Frontend GitHub](https://github.com/ydovzhyk/middle-way-copy)
 [Backend GitHub](https://github.com/ydovzhyk/middleway-backend-copy)
 
@@ -61,14 +62,14 @@ Short name: Art Studio Dental
 - Work done: Designed and developed a responsive, multilingual website for a real-world dental clinic, fully customized without using templates. Closely collaborated with the client to match branding and content goals.
 - Frontend: Built using React and Redux for dynamic UI and state management. Implemented responsive layouts with Sass and React Router for seamless page navigation. Multilingual support was added using React I18next, enabling smooth language switching. SEO was a key focus, with React Helmet used to dynamically manage meta tags. Google Analytics was integrated for traffic tracking and behavior insights.
 - Source:
-[Live Demo](https://asdental.org)
+[Live Demo](https://asdental.org/)
 
 6. **Notes Organizer** – Full-stack note management app (Full Stack Developer, Jan–Mar 2024)
 - Work done: Developed a feature-rich note management application for creating, categorizing, and collaborating on tasks. Focused on optimized UX, secure authentication, and flexible frontend/backend architecture.
 - Frontend: Built with TypeScript and React for type safety and scalability. Used Redux Toolkit for global state management and React Hook Form for dynamic and validated form inputs. Integrated third-party tools such as react-datepicker, react-select, date-fns, moment, react-calendar, and react-loader-spinner to enhance user experience. Implemented responsive UI using SASS and modular components for better maintainability.
 - Backend: Built a secure REST API with Node.js and Express, hosted on Heroku. Implemented user authentication with JWT and bcrypt. MongoDB used for storing user data and notes. Supported both anonymous and authenticated usage modes, with localStorage for guests and database sync for registered users.
 - Source:
-[Live Demo](https://notes-organiser-yd.netlify.app)
+[Live Demo](https://notes-organiser-yd.netlify.app/)
 [Frontend GitHub](https://github.com/ydovzhyk/notes-organizer)
 [Backend GitHub](https://github.com/ydovzhyk/notes-organizer-backend)
 
@@ -78,7 +79,7 @@ Short name: Art Studio Dental
 - Backend: Developed a REST API using Node.js and Express. Implemented JWT-based authentication and authorization with Passport.js. Integrated Firebase for secure image uploads, Multer for handling file transfers, and bcrypt for password encryption. Notification system included email (SendGrid) and SMS (Twilio). MongoDB was used as the primary database.
 - Deployment & Tools: Project utilized Docker for isolated environments. GitHub was used for team collaboration, with CI/CD workflows and structured branching.
 - Source:
-[Live Demo](https://easy-shop-team.netlify.app)
+[Live Demo](https://easy-shop-team.netlify.app/)
 [Frontend GitHub](https://github.com/ydovzhyk/easy-shop)
 [Backend GitHub](https://github.com/ydovzhyk/easy-shop-backend)
 
@@ -88,7 +89,7 @@ Short name: Art Studio Dental
 - Backend: Developed with Node.js, Express, and MongoDB. Implemented a secure REST API for user authentication, food management, and calorie tracking. API documentation was created using Swagger to facilitate clarity and maintainability.
 - Deployment: Automated deployment configured with YAML workflows. The frontend is hosted on GitHub Pages, while the backend is deployed on Heroku. Docker containers were built for both client and server, stored in GitHub repositories.
 - Source:
-[Live Demo](https://ydovzhyk.github.io/frontend-slimmom)
+[Live Demo](https://ydovzhyk.github.io/frontend-slimmom/)
 [Frontend GitHub](https://github.com/ydovzhyk/frontend-slimmom)
 [Backend GitHub](https://github.com/ydovzhyk/backend-slimmom)
 
@@ -98,7 +99,7 @@ Short name: Art Studio Dental
 Backend: Built with Node.js, Express, and MongoDB. Developed REST API endpoints for authentication, transactions, and reporting. Ensured smooth communication between frontend and backend, including secure login, data validation, and real-time calculations.
 - Deployment: Automated deployment configured via GitHub Actions. The frontend is hosted on GitHub Pages, while the backend is deployed to Heroku. Docker containers were created for isolated builds and stored in GitHub repositories.
 - Source:
-[Live Demo](https://ydovzhyk.github.io/frontend-kapusta-dev)
+[Live Demo](https://ydovzhyk.github.io/frontend-kapusta-dev/)
 [Frontend GitHub](https://github.com/ydovzhyk/frontend-kapusta-dev)
 [Backend GitHub](https://github.com/ydovzhyk/backend-kapusta-dev)
 
@@ -106,7 +107,7 @@ Backend: Built with Node.js, Express, and MongoDB. Developed REST API endpoints 
 - Work done: Dynamic search, pagination, branding, project structure leadership
 - Frontend: Built with HTML, SASS, and vanilla JavaScript. Integrated with a public REST API to fetch and display trending events. Implemented dynamic search with real-time filtering, pagination, and responsive layout. Designed a neon-styled header logo and structured the application UI with semantic HTML and SASS partials.
 - Source:
-[Live Demo](https://ydovzhyk.github.io/eventbooster_team_project)
+[Live Demo](https://ydovzhyk.github.io/eventbooster_team_project/)
 [Frontend GitHub](https://github.com/ydovzhyk/eventbooster_team_project)
 
 11. **Booking Apartment** – Educational project (Full Stack Developer, Dec 2024 – Present)
@@ -147,7 +148,7 @@ Languages:
 Contact information:
 – Email: ydovzhyk@gmail.com
 – Phone: +380503562938
-– Portfolio: [ydovzhyk.com](https://ydovzhyk.com)
+– Portfolio: [ydovzhyk.com](https://ydovzhyk.com/)
 – [GitHub](https://github.com/ydovzhyk)
 – [LinkedIn](https://www.linkedin.com/in/yuriy-dovzhyk/)
 – [Facebook](https://www.facebook.com/ydovzhyk/)
