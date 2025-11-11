@@ -222,6 +222,8 @@ export async function POST(req) {
           org_id: process.env.MEM0_ORG_ID,
           project_id: process.env.MEM0_PROJECT_ID,
           metadata: { question: prompt },
+          async_mode: false,
+          version: 'v2',
         }
       )
     } catch (e) {
