@@ -94,3 +94,46 @@
   mask-clip: padding-box, border-box;
   mask-composite: intersect;
 }
+
+@keyframes snow-fall {
+  from {
+    transform: translate3d(0, var(--start-y, -20vh), 0);
+    opacity: 0.8;
+  }
+  to {
+    transform: translate3d(0, var(--end-y, 100vh), 0);
+    opacity: 0;
+  }
+}
+
+@keyframes snow-sway {
+  from {
+    transform: translate3d(calc(-1 * var(--sway-amp, 18px)), 0, 0);
+  }
+  to {
+    transform: translate3d(var(--sway-amp, 18px), 0, 0);
+  }
+}
+
+.snowflake {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: visible;
+  color: white;
+  animation: snow-fall var(--fall-duration, 18s) linear infinite;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.snowflake-inner {
+  display: block;
+  animation: snow-sway var(--sway-duration, 7s) ease-in-out infinite alternate;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
