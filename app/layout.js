@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import ClientLayout from './ClientLayout'
 import Footer from './components/footer'
 import './css/card.scss'
-import './css/globals.scss'
+import './css/globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
