@@ -47,10 +47,13 @@ export default function AgentAI({ className = '' }) {
   const [isStreamingFinished, setIsStreamingFinished] = useState(false)
   const [screenHeight, setScreenHeight] = useState(0)
   const [panelTop, setPanelTop] = useState(0)
+  const [panelLeft, setPanelLeft] = useState(0)
   const [chatKey, setChatKey] = useState(0)
+
   const replyRef = useRef(null)
   const textareaRef = useRef(null)
   const inputWrapperRef = useRef(null)
+
   const examples = [
     'etc. Ask me about ydovzhyk.com',
     'etc. View the site asdental.org',
@@ -75,6 +78,7 @@ export default function AgentAI({ className = '' }) {
     }, 15000)
 
     setPlaceholder(examples[0])
+
     return () => clearInterval(interval)
   }, [])
 
@@ -91,17 +95,38 @@ export default function AgentAI({ className = '' }) {
     }
   }, [])
 
+  const autoResize = () => {
+    const el = textareaRef.current
+    if (el) {
+      el.style.height = 'auto'
+      el.style.height = el.scrollHeight + 'px'
+    }
+  }
+
+  const updatePanelPosition = () => {
+    if (!inputWrapperRef.current) return
+
+    const rect = inputWrapperRef.current.getBoundingClientRect()
+    const centerX = rect.left + rect.width / 2
+
+    setPanelLeft(centerX)
+    setPanelTop(rect.bottom + 18)
+  }
+
   const fetchSuggestions = async () => {
     try {
-      const usedQuestions = await JSON.parse(
-        sessionStorage.getItem('usedQuestions') || '[]'
+      const usedQuestions = JSON.parse(
+        sessionStorage.getItem('usedQuestions') || '[]',
       )
+
       const res = await fetch('/api/additional-questions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, usedQuestions }),
       })
+
       const data = await res.json()
+
       if (Array.isArray(data.questions)) {
         setSuggestions(data.questions)
       }
@@ -133,7 +158,7 @@ export default function AgentAI({ className = '' }) {
         })
       },
     }),
-    [userId]
+    [userId],
   )
 
   const {
@@ -153,11 +178,13 @@ export default function AgentAI({ className = '' }) {
     const lastAssistantMessage = [...messages]
       .reverse()
       .find((m) => m.role === 'assistant')
+
     return lastAssistantMessage?.content || ''
   }, [messages])
 
   useEffect(() => {
     const lastAssistantMessage = messages[messages.length - 1]
+
     if (
       lastAssistantMessage?.role === 'assistant' &&
       lastAssistantMessage?.content?.trim() &&
@@ -170,31 +197,28 @@ export default function AgentAI({ className = '' }) {
   useEffect(() => {
     if (showPanel) {
       fetchSuggestions()
+      updatePanelPosition()
     }
   }, [showPanel])
 
   useEffect(() => {
-    const updatePanelPosition = () => {
-      if (inputWrapperRef.current) {
-        const rect = inputWrapperRef.current.getBoundingClientRect()
-        setPanelTop(rect.bottom - 65)
-      }
-    }
-
     autoResize()
     updatePanelPosition()
 
     window.addEventListener('resize', updatePanelPosition)
-    return () => window.removeEventListener('resize', updatePanelPosition)
+    window.addEventListener('scroll', updatePanelPosition, true)
+
+    return () => {
+      window.removeEventListener('resize', updatePanelPosition)
+      window.removeEventListener('scroll', updatePanelPosition, true)
+    }
   }, [input])
 
-  const autoResize = () => {
-    const el = textareaRef.current
-    if (el) {
-      el.style.height = 'auto'
-      el.style.height = el.scrollHeight + 'px'
+  useEffect(() => {
+    if (showPanel) {
+      updatePanelPosition()
     }
-  }
+  }, [showPanel, suggestions, replyMessage, screenHeight])
 
   const saveUsedQuestion = (question) => {
     const used = JSON.parse(sessionStorage.getItem('usedQuestions') || '[]')
@@ -216,6 +240,7 @@ export default function AgentAI({ className = '' }) {
           onChange={(e) => {
             handleInputChange(e)
             autoResize()
+            updatePanelPosition()
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
@@ -224,10 +249,12 @@ export default function AgentAI({ className = '' }) {
 
               setShowPanel(false)
               setManuallyClosed(false)
+              setIsStreamingFinished(false)
 
               handleSubmit({
                 messages: [{ role: 'user', content: input }],
               })
+
               saveUsedQuestion(input)
               setMessages([])
               setChatKey((prev) => prev + 1)
@@ -244,6 +271,7 @@ export default function AgentAI({ className = '' }) {
             <Dots />
           </div>
         )}
+
         <button
           type="button"
           onClick={() => {
@@ -251,6 +279,7 @@ export default function AgentAI({ className = '' }) {
 
             setShowPanel(false)
             setManuallyClosed(false)
+            setIsStreamingFinished(false)
 
             handleSubmit({
               messages: [{ role: 'user', content: input }],
@@ -260,6 +289,7 @@ export default function AgentAI({ className = '' }) {
                 },
               },
             })
+
             saveUsedQuestion(input)
             setMessages([])
             setChatKey((prev) => prev + 1)
@@ -274,8 +304,12 @@ export default function AgentAI({ className = '' }) {
 
       {showPanel && (
         <div
-          className="absolute left-1/2 md:w-[70vw] lg:w-[50vw] w-full -translate-x-1/2 z-60 opacity-0 animate-fade-in-up sm:px-0"
-          style={{ top: panelTop }}
+          className="fixed z-60 opacity-0 animate-fade-in-up w-[calc(100vw-24px)] sm:w-[min(70vw,1100px)] lg:w-[min(50vw,1100px)]"
+          style={{
+            top: panelTop,
+            left: panelLeft,
+            transform: 'translateX(-50%)',
+          }}
         >
           <div className="w-full bg-[#0D1224] rounded-md border border-neutral-700 shadow-lg">
             <div
@@ -291,6 +325,7 @@ export default function AgentAI({ className = '' }) {
                   }}
                 />
               </div>
+
               <div className="w-full flex flex-row items-center justify-center gap-2 -my-3">
                 <Image
                   src="/assistant_01.svg"
@@ -344,15 +379,13 @@ export default function AgentAI({ className = '' }) {
                     key={idx}
                     onClick={() => {
                       if (!isStreamingFinished) return
+
                       setInput(question)
 
                       setTimeout(() => {
-                        if (inputWrapperRef.current) {
-                          const rect =
-                            inputWrapperRef.current.getBoundingClientRect()
-                          setPanelTop(rect.bottom - 65)
-                        }
+                        updatePanelPosition()
                       }, 10)
+
                       setShowPanel(false)
                     }}
                     className="cursor-pointer group bg-gradient-to-r from-violet-600 to-pink-500 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
@@ -368,27 +401,32 @@ export default function AgentAI({ className = '' }) {
           </div>
         </div>
       )}
+
       <style jsx>{`
         .custom-scroll::-webkit-scrollbar {
           width: 4px;
         }
+
         .custom-scroll::-webkit-scrollbar-track {
           background: transparent;
         }
+
         .custom-scroll::-webkit-scrollbar-thumb {
           background: linear-gradient(to bottom, #ec4899, #8b5cf6);
           border-radius: 10px;
         }
+
         @keyframes fade-in-up {
           from {
-            transform: translate(-50%, -20px);
             opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
           }
           to {
-            transform: translate(-50%, 0);
             opacity: 1;
+            transform: translateX(-50%) translateY(0);
           }
         }
+
         .animate-fade-in-up {
           animation: fade-in-up 0.4s ease-out forwards;
         }
