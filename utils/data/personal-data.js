@@ -22,7 +22,7 @@ If you're looking for someone who takes ownership, thinks critically, and codes 
   leetcode: '',
   devUsername: 'ydovzhyk',
   resume:
-    'https://drive.google.com/file/d/15EN2cDg3XFn-YbDVu8igzru0lxsA3W_A/view?usp=sharing',
+    'https://drive.google.com/file/d/1c2rApnN558jvZG5U3mxXYMtEzq8jv7iG/view?usp=sharing',
 }
 
 // export const personalData = {
