@@ -26,12 +26,12 @@ function Footer() {
               <Image
                 src={logo}
                 width={130}
-                alt="pfile photo"
+                alt="profile photo"
                 className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
               />
             </Link>
           </div>
-          <p className="text-sm">Updated 2025</p>
+          <p className="text-sm">Updated 2026</p>
         </div>
       </div>
     </div>
