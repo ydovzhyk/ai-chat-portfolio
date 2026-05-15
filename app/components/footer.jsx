@@ -26,7 +26,7 @@ function Footer() {
               <Image
                 src={logo}
                 width={130}
-                alt="profile photo"
+                alt="logo photo"
                 className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
               />
             </Link>
