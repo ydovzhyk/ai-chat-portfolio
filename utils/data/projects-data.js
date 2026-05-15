@@ -1,6 +1,53 @@
 export const projectsData = [
   {
     id: 1,
+    name: 'Style Generate AI',
+    shotName: 'Style AI',
+    tools: [
+      'Next.js',
+      'React',
+      'Redux',
+      'Tailwind CSS',
+      'Axios',
+      'Node.js',
+      'Express',
+      'MongoDB',
+      'Firebase Storage',
+      'OpenAI',
+      'Vercel',
+    ],
+    role: 'Full Stack Developer / Product Owner',
+    description:
+      'Personal commercial AI image generation product built to be monetized. The platform focuses on AI-powered style transformation, portrait generation, and interior visualization. Built end-to-end with a Next.js frontend, Node.js/Express backend, MongoDB, Firebase Storage, OpenAI image generation, visitor/user generation limits, subscription-plan logic, admin tools, gallery saving, and AI usage/cost tracking. Development is ongoing.',
+    frontendGitLink: 'https://github.com/ydovzhyk/stylegenerateai',
+    backendGitLink: 'https://github.com/ydovzhyk/stylegenerateai-backend',
+    demo: 'https://style-generate-ai.vercel.app/',
+    ready: true,
+  },
+  {
+    id: 2,
+    name: 'ARTMED Clinic',
+    shotName: 'ARTMED',
+    tools: [
+      'Next.js',
+      'React',
+      'Tailwind CSS',
+      'Framer Motion',
+      'Lucide React',
+      'Google Maps API',
+      'SEO',
+      'Vercel',
+    ],
+    role: 'Frontend Developer',
+    description:
+      'Production frontend website for a medical clinic in Platja d’Aro, Spain. Built from scratch with a clean responsive UI, service sections, clinic advantages, contact actions, Google Maps/location section, SEO metadata, Open Graph configuration, sitemap, robots file, and deployment on Vercel. The project was created as a polished business landing page focused on trust, clarity, and easy contact flow.',
+    frontendGitLink: 'https://github.com/ydovzhyk/artmed-clinic',
+    backendGitLink: '',
+    demo: 'https://artmed.live/',
+    ready: true,
+  },
+  {
+    id: 3,
     name: 'PinkSkirt',
     shotName: 'PinkSkirt',
     tools: [
@@ -23,7 +70,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 2,
+    id: 4,
     name: 'BlueHouse',
     shotName: 'BlueHouse',
     tools: ['React', 'Redux', 'Sass', 'Webpack'],
@@ -37,7 +84,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 3,
+    id: 5,
     name: 'SpeakFlow',
     shotName: 'SpeakFlow',
     tools: [
@@ -60,7 +107,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 4,
+    id: 6,
     name: 'Art Studio Dental',
     shotName: 'Art Studio Dental',
     tools: ['React', 'Redux', 'Sass', 'React I18next', 'React Helmet'],
@@ -73,7 +120,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 5,
+    id: 7,
     name: 'Middle Way',
     shotName: 'Middle Way',
     tools: [
@@ -97,7 +144,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 6,
+    id: 8,
     name: 'Booking Apartment',
     shotName: 'Booking Apartment',
     tools: [
@@ -124,7 +171,7 @@ export const projectsData = [
     ready: false,
   },
   {
-    id: 7,
+    id: 9,
     name: 'Easy-Shop',
     shotName: 'Easy-Shop',
     tools: [
@@ -150,7 +197,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 8,
+    id: 10,
     name: 'Notes Organizer',
     shotName: 'Notes Organizer',
     tools: [
@@ -172,7 +219,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 9,
+    id: 11,
     name: 'Slim Mom',
     shotName: 'Slim Mom',
     role: 'Full Stack Developer',
@@ -194,7 +241,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 10,
+    id: 12,
     name: 'Kapu$ta',
     shotName: 'Kapu$ta',
     description:
@@ -215,7 +262,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 11,
+    id: 13,
     name: 'Event Booster',
     shotName: 'Event Booster',
     tools: ['HTML', 'SASS', 'JavaScript', 'REST API'],
