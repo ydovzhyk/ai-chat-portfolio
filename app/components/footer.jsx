@@ -17,7 +17,7 @@ function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               href="https://www.linkedin.com/in/yuriy-dovzhyk/"
-              className="text-cyan-400 hover:text-cyan-300 transition-all duration-300"
+              className="text-cyan-400 underline underline-offset-4 hover:text-cyan-300 transition-all duration-300"
             >
               Yuriy Dovzhyk
             </Link>
