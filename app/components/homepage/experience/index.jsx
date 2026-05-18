@@ -103,10 +103,10 @@ function Experience() {
                               handleProjectClick(
                                 e,
                                 project,
-                                experience.notReady
+                                experience.notReady,
                               )
                             }
-                            className="text-cyan-400 hover:underline hover:text-cyan-300 transition-all duration-300"
+                            className="inline-flex min-h-[44px] items-center text-cyan-400 hover:text-cyan-300 transition-all duration-300"
                           >
                             {project}
                           </a>
