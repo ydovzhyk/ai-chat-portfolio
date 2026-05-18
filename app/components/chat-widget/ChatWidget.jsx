@@ -387,6 +387,9 @@ const ChatWidget = () => {
   return (
     <>
       <button
+        type="button"
+        aria-label={isOpen ? 'Close chat assistant' : 'Open chat assistant'}
+        title={isOpen ? 'Close chat assistant' : 'Open chat assistant'}
         onClick={toggleChat}
         className={`fixed bottom-[140px] sm:bottom-32 right-6 z-60 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4 text-white shadow-xl hover:brightness-110 transition ${
           isOpen ? 'animate-none' : 'animate-pulseCustom'
@@ -422,6 +425,9 @@ const ChatWidget = () => {
             </div>
             <div className="flex flex-row items-center gap-3 mb-4 rounded-xl border border-neutral-700 px-4 py-3 shadow-xl">
               <button
+                type="button"
+                aria-label="Clear chat"
+                title="Clear chat"
                 onClick={clearChat}
                 className="text-gray-400 hover:text-pink-400 transition"
               >
@@ -488,6 +494,9 @@ const ChatWidget = () => {
                   .map((link, idx) => (
                     <button
                       key={idx}
+                      type="button"
+                      aria-label={`About ${link.shotName || new URL(link.url).hostname} site`}
+                      title={`About ${link.shotName || new URL(link.url).hostname} site`}
                       onClick={() => handleAvtoClick(link.shotName, link.url)}
                       disabled={isTavilyLoading}
                       className="h-8 w-[45%] rounded-md bg-gradient-to-r from-pink-500 to-violet-600 px-2 text-white text-xs hover:brightness-110 transition flex items-center justify-center leading-tight text-center"
@@ -516,6 +525,10 @@ const ChatWidget = () => {
             {message.trim().length === 0 && (
               <button
                 type="button"
+                aria-label={
+                  isRecording ? 'Stop voice input' : 'Start voice input'
+                }
+                title={isRecording ? 'Stop voice input' : 'Start voice input'}
                 onClick={handleMicClick}
                 className={`absolute right-4 top-1/2 -translate-y-1/2 transition ${
                   isRecording
@@ -535,6 +548,9 @@ const ChatWidget = () => {
             )}
           </div>
           <button
+            type="button"
+            aria-label="Send message"
+            title="Send message"
             onClick={sendMessage}
             disabled={!message.trim()}
             className="mt-3 w-full rounded-md bg-gradient-to-r from-pink-500 to-violet-600 py-2 px-4 text-white text-sm hover:brightness-110 transition"

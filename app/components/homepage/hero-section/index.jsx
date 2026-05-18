@@ -1,18 +1,17 @@
 // @flow strict
-'use client';
+'use client'
 
 /* eslint-disable react/no-unescaped-entities */
-import React, { useCallback } from 'react';
-import { personalData } from '../../../../utils/data/personal-data';
-import Image from "next/image";
-import Link from "next/link";
-import { BiLogoLinkedin } from 'react-icons/bi';
-import { FaFacebook } from 'react-icons/fa';
-import { IoLogoGithub, IoMdCall } from 'react-icons/io';
-import { MdAlternateEmail } from 'react-icons/md';
+import React, { useCallback } from 'react'
+import { personalData } from '../../../../utils/data/personal-data'
+import Image from 'next/image'
+import Link from 'next/link'
+import { BiLogoLinkedin } from 'react-icons/bi'
+import { FaFacebook } from 'react-icons/fa'
+import { IoLogoGithub, IoMdCall } from 'react-icons/io'
+import { MdAlternateEmail } from 'react-icons/md'
 
 function HeroSection() {
-
   const handleScroll = useCallback((id) => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return
 
@@ -27,7 +26,7 @@ function HeroSection() {
         behavior: 'smooth',
       })
     }
-  }, []);
+  }, [])
 
   return (
     <section
@@ -39,6 +38,7 @@ function HeroSection() {
         alt="Hero"
         width={1572}
         height={865}
+        priority
         className="absolute -top-[168px] -z-10"
       />
       <div className="grid grid-cols-1 items-start lg:grid-cols-2 lg:gap-12 gap-y-8">
@@ -53,31 +53,61 @@ function HeroSection() {
             {` who loves building useful things.`}
           </h1>
           <div className="mt-6 mb-6 lg:mt-10 lg:mb-10 flex items-center gap-5 lg:gap-10">
-            <Link target="_blank" href={personalData.github}>
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              href={personalData.github}
+              aria-label="Open GitHub profile"
+              title="Open GitHub profile"
+            >
               <IoLogoGithub
                 className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
                 size={48}
               />
             </Link>
-            <Link target="_blank" href={personalData.linkedIn}>
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              href={personalData.linkedIn}
+              aria-label="Open LinkedIn profile"
+              title="Open LinkedIn profile"
+            >
               <BiLogoLinkedin
                 className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
                 size={48}
               />
             </Link>
-            <Link target="_blank" href={personalData.facebook}>
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              href={personalData.facebook}
+              aria-label="Open Facebook profile"
+              title="Open Facebook profile"
+            >
               <FaFacebook
                 className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
                 size={48}
               />
             </Link>
-            <Link target="_blank" href={`mailto:${personalData.email}`}>
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`mailto:${personalData.email}`}
+              aria-label="Send email"
+              title="Send email"
+            >
               <MdAlternateEmail
                 className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
                 size={48}
               />
             </Link>
-            <Link target="_blank" href={`tel:${personalData.phone}`}>
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`tel:${personalData.phone}`}
+              aria-label="Call phone number"
+              title="Call phone number"
+            >
               <IoMdCall
                 className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
                 size={48}
@@ -241,6 +271,6 @@ function HeroSection() {
       </div>
     </section>
   )
-};
+}
 
-export default HeroSection;
+export default HeroSection

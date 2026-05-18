@@ -274,6 +274,8 @@ export default function AgentAI({ className = '' }) {
 
         <button
           type="button"
+          aria-label="Search with AI assistant"
+          title="Search with AI assistant"
           onClick={() => {
             if (!input.trim()) return
 

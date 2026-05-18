@@ -37,6 +37,9 @@ const ScrollToTop = () => {
 
   return (
     <button
+      type="button"
+      aria-label="Scroll to top"
+      title="Scroll to top"
       className={`${DEFAULT_BTN_CLS} ${isVisible ? 'block' : 'hidden'} group`}
       onClick={scrollToTop}
     >

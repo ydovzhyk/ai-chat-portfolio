@@ -1,5 +1,5 @@
 // @flow strict
-import Link from 'next/link';
+import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../public/logo.png'
 
@@ -15,27 +15,35 @@ function Footer() {
             © Portfolio by{' '}
             <Link
               target="_blank"
+              rel="noopener noreferrer"
               href="https://www.linkedin.com/in/yuriy-dovzhyk/"
-              className="text-[#16f2b3]"
+              className="text-[#16f2b3] hover:underline underline-offset-4"
             >
               Yuriy Dovzhyk
             </Link>
           </p>
+
           <div className="flex flex-shrink-0 items-center">
-            <Link href="/" className=" text-[#16f2b3] text-3xl font-bold">
+            <Link
+              href="/"
+              aria-label="Go to homepage"
+              title="Go to homepage"
+              className="text-[#16f2b3] text-3xl font-bold"
+            >
               <Image
                 src={logo}
                 width={130}
-                alt="logo photo"
+                alt="Portfolio logo"
                 className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
               />
             </Link>
           </div>
+
           <p className="text-sm">Updated 2026</p>
         </div>
       </div>
     </div>
   )
-};
+}
 
-export default Footer;
+export default Footer
