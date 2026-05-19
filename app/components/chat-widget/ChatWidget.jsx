@@ -391,7 +391,7 @@ const ChatWidget = () => {
         aria-label={isOpen ? 'Close chat assistant' : 'Open chat assistant'}
         title={isOpen ? 'Close chat assistant' : 'Open chat assistant'}
         onClick={toggleChat}
-        className={`fixed bottom-[140px] sm:bottom-32 right-6 z-60 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4 text-white shadow-xl hover:brightness-110 transition ${
+        className={`fixed bottom-[140px] sm:bottom-32 right-6 z-[120] flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4 text-white shadow-xl hover:brightness-110 transition ${
           isOpen ? 'animate-none' : 'animate-pulseCustom'
         }`}
       >
@@ -401,7 +401,7 @@ const ChatWidget = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-0 sm:bottom-8 left-1/2 sm:left-auto -translate-x-1/2 sm:translate-x-0 sm:right-24 z-50 w-[90%] sm:w-[350px] rounded-xl border border-neutral-700 p-4 shadow-xl text-white bg-gradient-to-r from-[#0d1224] to-[#0a0d37]">
+        <div className="fixed bottom-0 sm:bottom-8 left-1/2 sm:left-auto -translate-x-1/2 sm:translate-x-0 sm:right-24 z-[110] w-[90%] sm:w-[350px] rounded-xl border border-neutral-700 p-4 shadow-xl text-white bg-gradient-to-r from-[#0d1224] to-[#0a0d37]">
           <div className="flex flex-row justify-between items-center gap-2">
             <div className="flex  flex-row items-center gap-3 w-[80%] mb-4 rounded-xl border border-neutral-700 pl-[10px] pr-[10px] py-1 shadow-xl">
               <Image

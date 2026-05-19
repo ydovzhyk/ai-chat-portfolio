@@ -25,11 +25,10 @@ function AboutSection() {
           <div className="flex flex-row items-center justify-center">
             <Image
               src={personalData.profile}
-              width={280}
-              height={280}
+              width={320}
+              height={320}
               alt="profile photo"
-              className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
-              style={{ width: 'auto', height: 'auto' }}
+              className="h-[320px] w-[320px] rounded-lg object-cover transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
             />
           </div>
         </div>
