@@ -257,7 +257,7 @@ export default function AgentAI({ className = '' }) {
     <div className="w-full flex items-center justify-center relative">
       <div
         ref={inputWrapperRef}
-        className={`relative ${className} w-full max-w-[780px] overflow-hidden rounded-2xl border border-violet-500/30 bg-[#0D1224]/80 backdrop-blur-xl shadow-[0_0_35px_rgba(168,85,247,0.16)] transition focus-within:border-pink-500/40 focus-within:shadow-[0_0_40px_rgba(236,72,153,0.16)]`}
+        className={`relative ${className} w-full max-w-[780px] overflow-hidden rounded-lg border border-violet-500/30 bg-[#0D1224]/80 backdrop-blur-xl shadow-[0_0_35px_rgba(168,85,247,0.16)] transition focus-within:border-pink-500/40 focus-within:shadow-[0_0_40px_rgba(236,72,153,0.16)]`}
       >
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-violet-500/10 via-pink-500/10 to-cyan-400/10 opacity-70" />
         <div className="pointer-events-none absolute -left-16 top-0 h-full w-20 rotate-12 bg-white/10 blur-xl animate-agent-shine" />
@@ -332,7 +332,7 @@ export default function AgentAI({ className = '' }) {
             width: panelWidth,
           }}
         >
-          <div className="relative w-full overflow-hidden rounded-2xl border border-violet-500/30 bg-[#0D1224] shadow-[0_0_35px_rgba(168,85,247,0.16)]">
+          <div className="relative w-full overflow-hidden rounded-lg border border-violet-500/30 bg-[#0D1224] shadow-[0_0_35px_rgba(168,85,247,0.16)]">
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-violet-500/10 via-pink-500/10 to-cyan-400/10 opacity-70" />
             <div className="pointer-events-none absolute -left-16 top-0 h-full w-20 rotate-12 bg-white/10 blur-xl animate-agent-shine" />
 
@@ -367,7 +367,7 @@ export default function AgentAI({ className = '' }) {
 
               <div
                 ref={replyRef}
-                className="mt-6 -mb-6 flex-1 overflow-y-auto rounded-xl border border-neutral-700 bg-[#0D1224] p-4 custom-scroll text-gray-200 text-sm font-extralight"
+                className="mt-6 -mb-6 flex-1 overflow-y-auto rounded-lg border border-neutral-700 bg-[#0D1224] p-4 custom-scroll text-gray-200 text-sm font-extralight"
                 style={{
                   backgroundImage: "url('/section.svg')",
                   backgroundSize: 'cover',
