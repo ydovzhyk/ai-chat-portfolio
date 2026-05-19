@@ -28,7 +28,7 @@ function AboutSection() {
               width={320}
               height={320}
               alt="profile photo"
-              className="h-[320px] w-[320px] rounded-lg object-cover transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
+              className="h-[320px] w-[320px] rounded-lg object-cover transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-105 cursor-pointer"
             />
           </div>
         </div>
