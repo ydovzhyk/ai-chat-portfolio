@@ -176,17 +176,26 @@ const ChatWidget = () => {
       minute: '2-digit',
     })
 
+  const hasUserMessages = chat.some(
+    (msg) => msg.role === 'user' && msg.text?.trim(),
+  )
+
   const toggleChat = () => {
     const audio = new Audio('/sounds/new-notification.mp3')
+
     audio.play().catch((e) => {
       console.warn('Failed to play sound:', e)
     })
+
     if (isOpen) {
-      sendChatToTelegram()
+      if (hasUserMessages) {
+        sendChatToTelegram()
+      }
     } else {
       if (chat.length === 0) {
         const greeting = greetings[Math.floor(Math.random() * greetings.length)]
         const now = new Date()
+
         setChat([
           {
             role: 'assistant',
@@ -196,6 +205,7 @@ const ChatWidget = () => {
         ])
       }
     }
+
     setIsOpen((prev) => !prev)
   }
 
