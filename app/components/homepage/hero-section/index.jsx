@@ -39,6 +39,8 @@ function HeroSection() {
         width={1572}
         height={865}
         priority
+        fetchPriority="high"
+        loading="eager"
         className="absolute -top-[188px] -z-10"
       />
       <div className="grid grid-cols-1 items-start lg:grid-cols-2 lg:gap-12 gap-y-8">
