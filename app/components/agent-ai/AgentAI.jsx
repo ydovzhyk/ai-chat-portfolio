@@ -8,6 +8,8 @@ import { TfiClose } from 'react-icons/tfi'
 import ReactMarkdown from 'react-markdown'
 import { toast } from 'sonner'
 
+const MAX_MESSAGE_LENGTH = 500
+
 const Dots = () => (
   <span className="flex items-center gap-2 text-gray-400">
     <span className="text-sm font-extralight">Searching the web</span>
@@ -235,6 +237,13 @@ export default function AgentAI({ className = '' }) {
   const submitQuestion = () => {
     if (!input.trim()) return
 
+    if (input.trim().length > MAX_MESSAGE_LENGTH) {
+      toast.error('Message is too long.', {
+        description: `Please keep your request under ${MAX_MESSAGE_LENGTH} characters.`,
+      })
+      return
+    }
+
     setShowPanel(false)
     setManuallyClosed(false)
     setIsStreamingFinished(false)
@@ -285,6 +294,7 @@ export default function AgentAI({ className = '' }) {
             <textarea
               ref={textareaRef}
               value={isLoading ? '' : input}
+              maxLength={MAX_MESSAGE_LENGTH}
               onChange={(e) => {
                 handleInputChange(e)
                 autoResize()

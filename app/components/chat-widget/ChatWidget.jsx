@@ -12,6 +12,9 @@ import { greetings } from '../../../utils/data/greetings'
 import { CiMicrophoneOn } from 'react-icons/ci'
 import { IoStopCircleOutline } from 'react-icons/io5'
 
+const MAX_MESSAGE_LENGTH = 500
+const MAX_RECORDING_MS = 2 * 60 * 1000
+
 const ThinkingDots = () => {
   return (
     <span className="flex items-center gap-2 text-gray-400">
@@ -112,8 +115,22 @@ const ChatWidget = () => {
     audioContext,
     sourceNode,
   } = useAudioRecorder({})
+  const recordingTimeoutRef = useRef(null)
 
   const fallbackMessage = `⚠️ The response was too large and couldn't be delivered due to technical limitations. Please try asking a more specific or narrowly focused question.`
+
+  const clearRecordingTimeout = () => {
+    if (recordingTimeoutRef.current) {
+      clearTimeout(recordingTimeoutRef.current)
+      recordingTimeoutRef.current = null
+    }
+  }
+
+  useEffect(() => {
+    return () => {
+      clearRecordingTimeout()
+    }
+  }, [])
 
   const fetchUrls = async () => {
     try {
@@ -212,6 +229,8 @@ const ChatWidget = () => {
   const sendMessage = async () => {
     if (!message.trim()) return
 
+    if (message.trim().length > MAX_MESSAGE_LENGTH) return
+
     const now = new Date()
     const currentMessage = message
     setMessage('')
@@ -305,7 +324,7 @@ const ChatWidget = () => {
 
       const data = await res.json()
       if (data.text) {
-        setMessage(data.text)
+        setMessage(String(data.text).slice(0, MAX_MESSAGE_LENGTH))
       } else {
         console.warn('No transcription result')
       }
@@ -320,13 +339,34 @@ const ChatWidget = () => {
     if (!isRecording) {
       await startRecording()
       setIsTranscribing(true)
+
+      clearRecordingTimeout()
+
+      recordingTimeoutRef.current = setTimeout(async () => {
+        try {
+          const audioBlob = await stopRecording()
+
+          if (audioBlob) {
+            await sendAudioToServer(audioBlob)
+          }
+        } catch (err) {
+          console.error('Auto stop recording failed:', err)
+          setIsTranscribing(false)
+        } finally {
+          clearRecordingTimeout()
+        }
+      }, MAX_RECORDING_MS)
     } else {
+      clearRecordingTimeout()
+
       const audioBlob = await stopRecording()
       if (audioBlob) {
         // const url = URL.createObjectURL(audioBlob)
         // const audio = new Audio(url)
         // audio.play()
         await sendAudioToServer(audioBlob)
+      } else {
+        setIsTranscribing(false)
       }
     }
   }
@@ -524,6 +564,7 @@ const ChatWidget = () => {
               onKeyDown={handleKeyDown}
               placeholder={isTranscribing ? '' : 'Ask something...'}
               disabled={isTranscribing}
+              maxLength={MAX_MESSAGE_LENGTH}
               rows={1}
               className="w-full min-h-[40px] bg-[#221A4A] rounded-md border border-neutral-700 px-3 py-2 pr-10 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 custom-scroll mb-[-6px]"
             />
