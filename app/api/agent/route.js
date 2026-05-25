@@ -12,7 +12,7 @@ const FIRECRAWL_API_KEY = process.env.FIRECRAWL_API_KEY
 const mem0 = new MemoryClient({ apiKey: MEM0_API_KEY })
 const exa = new Exa(process.env.EXA_API_KEY)
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 export async function POST(req) {
   const body = await req.json()
@@ -51,16 +51,18 @@ export async function POST(req) {
         return []
       }),
 
-    exa
-      .getContents([exactUrl], {
-        text: true,
-        summary: true,
-        livecrawl: 'always',
-      })
-      .catch((e) => {
-        console.error('Exa error:', e)
-        return { results: [] }
-      }),
+    exactUrl
+      ? exa
+          .getContents([exactUrl], {
+            text: true,
+            summary: true,
+            livecrawl: 'always',
+          })
+          .catch((e) => {
+            console.error('Exa error:', e)
+            return { results: [] }
+          })
+      : Promise.resolve({ results: [] }),
 
     fetch('https://api.tavily.com/search', {
       method: 'POST',
