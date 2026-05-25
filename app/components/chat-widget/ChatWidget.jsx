@@ -58,10 +58,10 @@ const ThinkingDots = () => {
   )
 }
 
-const Dots = () => {
+const Dots = ({ label = 'Thinking' }) => {
   return (
     <span className="flex items-center gap-2 text-gray-400">
-      <span className="text-sm font-extralight">Thinking</span>
+      <span className="text-sm font-extralight">{label}</span>
       <span className="dot">.</span>
       <span className="dot delay-150">.</span>
       <span className="dot delay-300">.</span>
@@ -570,7 +570,7 @@ const ChatWidget = () => {
             />
             {isTranscribing && (
               <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-white text-sm">
-                <Dots />
+                <Dots label={isRecording ? 'Listening' : 'Thinking'} />
               </div>
             )}
             {message.trim().length === 0 && (
