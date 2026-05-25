@@ -6,24 +6,29 @@ const useAudioRecorder = ({ dataCb }) => {
   const [isRecording, setIsRecording] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [recordingTime, setRecordingTime] = useState(0)
-  const [mediaRecorder, setMediaRecorder] = useState()
-  const [timerInterval, setTimerInterval] = useState()
+
   const audioContext = useRef(null)
   const sourceNode = useRef(null)
   const workletNode = useRef(null)
   const audioChunksRef = useRef([])
+  const mediaRecorderRef = useRef(null)
+  const timerIntervalRef = useRef(null)
+  const streamRef = useRef(null)
 
   const _startTimer = useCallback(() => {
-    const interval = setInterval(() => {
+    if (timerIntervalRef.current) return
+
+    timerIntervalRef.current = setInterval(() => {
       setRecordingTime((time) => time + 1)
     }, 1000)
-    setTimerInterval(interval)
   }, [])
 
   const _stopTimer = useCallback(() => {
-    if (timerInterval) clearInterval(timerInterval)
-    setTimerInterval(undefined)
-  }, [timerInterval])
+    if (timerIntervalRef.current) {
+      clearInterval(timerIntervalRef.current)
+      timerIntervalRef.current = null
+    }
+  }, [])
 
   const float32To16BitPCM = (float32Arr) => {
     const pcm16bit = new Int16Array(float32Arr.length)
@@ -35,24 +40,29 @@ const useAudioRecorder = ({ dataCb }) => {
   }
 
   const startRecording = async () => {
-    if (timerInterval != null) throw new Error('timerInterval not null')
+    if (mediaRecorderRef.current) return
 
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-    audioContext.current = new (window.AudioContext ||
-      window.webkitAudioContext)()
+    streamRef.current = stream
+
+    audioContext.current = new (
+      window.AudioContext || window.webkitAudioContext
+    )()
+
     await audioContext.current.audioWorklet.addModule(
-      '/audio-worklet/recorder-processor.js'
+      '/audio-worklet/recorder-processor.js',
     )
 
     sourceNode.current = audioContext.current.createMediaStreamSource(stream)
     workletNode.current = new AudioWorkletNode(
       audioContext.current,
-      'recorder-processor'
+      'recorder-processor',
     )
 
     workletNode.current.port.onmessage = (event) => {
       const float32Audio = event.data
       const pcm16Audio = float32To16BitPCM(float32Audio)
+
       if (dataCb) {
         dataCb(pcm16Audio, audioContext.current.sampleRate)
       }
@@ -63,7 +73,7 @@ const useAudioRecorder = ({ dataCb }) => {
       .connect(audioContext.current.destination)
 
     const recorder = new MediaRecorder(stream)
-    setMediaRecorder(recorder)
+    mediaRecorderRef.current = recorder
     audioChunksRef.current = []
 
     recorder.ondataavailable = (event) => {
@@ -75,42 +85,77 @@ const useAudioRecorder = ({ dataCb }) => {
     recorder.start()
     setIsRecording(true)
     _startTimer()
+
     return audioContext.current.sampleRate
   }
 
   const stopRecording = async () => {
     return new Promise((resolve) => {
-      if (!mediaRecorder) return resolve(null)
+      const recorder = mediaRecorderRef.current
 
-      mediaRecorder.onstop = () => {
+      if (!recorder) {
+        setIsRecording(false)
+        setIsPaused(false)
+        _stopTimer()
+        return resolve(null)
+      }
+
+      recorder.onstop = async () => {
         const audioBlob = new Blob(audioChunksRef.current, {
           type: 'audio/webm',
         })
+
         audioChunksRef.current = []
+
         sourceNode.current?.disconnect()
         workletNode.current?.disconnect()
+
+        streamRef.current?.getTracks?.().forEach((track) => track.stop())
+        streamRef.current = null
+
+        if (audioContext.current?.state !== 'closed') {
+          await audioContext.current.close().catch(() => {})
+        }
+
+        audioContext.current = null
+        sourceNode.current = null
+        workletNode.current = null
+        mediaRecorderRef.current = null
+
         setRecordingTime(0)
         setIsRecording(false)
         setIsPaused(false)
+        _stopTimer()
+
         resolve(audioBlob)
       }
 
-      mediaRecorder.stop()
-      _stopTimer()
+      if (recorder.state !== 'inactive') {
+        recorder.stop()
+      } else {
+        mediaRecorderRef.current = null
+        setIsRecording(false)
+        setIsPaused(false)
+        _stopTimer()
+        resolve(null)
+      }
     })
   }
 
   const togglePauseResume = useCallback(() => {
+    const recorder = mediaRecorderRef.current
+    if (!recorder) return
+
     if (isPaused) {
       setIsPaused(false)
-      mediaRecorder?.resume()
+      recorder.resume()
       _startTimer()
     } else {
       setIsPaused(true)
       _stopTimer()
-      mediaRecorder?.pause()
+      recorder.pause()
     }
-  }, [mediaRecorder, isPaused, _startTimer, _stopTimer])
+  }, [isPaused, _startTimer, _stopTimer])
 
   return {
     startRecording,
@@ -121,4 +166,5 @@ const useAudioRecorder = ({ dataCb }) => {
     sourceNode: sourceNode.current,
   }
 }
+
 export default useAudioRecorder
