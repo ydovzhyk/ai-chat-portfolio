@@ -263,6 +263,10 @@ const ChatWidget = () => {
 
       const data = await response.json()
 
+      if (!response.ok) {
+        throw new Error(data?.reply || data?.error || 'Request failed')
+      }
+
       setChat((prev) => {
         const updated = [...prev]
         updated[updated.length - 1] = {

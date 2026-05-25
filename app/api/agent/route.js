@@ -16,7 +16,25 @@ export const runtime = 'edge'
 
 export async function POST(req) {
   const body = await req.json()
-  const { userId, prompt } = body
+  const { userId } = body
+  const prompt = String(body.prompt || body.message || '').trim()
+
+  if (!prompt) {
+    return NextResponse.json(
+      { reply: 'Please enter a message.' },
+      { status: 400 },
+    )
+  }
+
+  if (prompt.length > 500) {
+    return NextResponse.json(
+      {
+        reply:
+          'Message is too long. Please keep your request under 500 characters.',
+      },
+      { status: 400 },
+    )
+  }
 
   const match = prompt.match(/https?:\/\/[^"\s]+/)
   const exactUrl = match ? match[0] : null
