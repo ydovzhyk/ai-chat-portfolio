@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { useCallback, useState } from 'react'
 import logo from '../../public/logo.png'
 import ActiveSectionObserver from './helper/ActiveSectionObserver'
-// import AgentAI from './agent-ai/AgentAI'
 function Header() {
   const [activeSection, setActiveSection] = useState('')
 
@@ -29,8 +28,9 @@ function Header() {
   return (
     <header className="fixed top-0 left-0 w-full z-[100] backdrop-blur-md bg-opacity-50">
       <ActiveSectionObserver setActiveSection={setActiveSection} />
+
       <div className="mx-auto lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem] px-6 sm:px-12">
-        <nav className="background-transparent">
+        <nav className="background-transparent" aria-label="Main navigation">
           <div className="flex items-center justify-between py-5">
             <div className="flex flex-shrink-0 items-center">
               <Link href="/" className="text-[#16f2b3] text-3xl font-bold">
@@ -42,7 +42,7 @@ function Header() {
                 />
               </Link>
             </div>
-            {/* <AgentAI className="hidden custom-lg:block" /> */}
+
             <ul
               className="mt-4 flex h-screen max-h-0 w-full flex-col items-start text-sm opacity-0 md:mt-0 md:h-auto md:max-h-screen md:w-auto md:flex-row md:space-x-1 md:border-0 md:opacity-100 gap-11"
               id="navbar-default"
@@ -56,8 +56,9 @@ function Header() {
               ].map(({ id, label }) => (
                 <li key={id} className="relative flex flex-col items-center">
                   <button
+                    type="button"
                     onClick={() => handleScroll(id)}
-                    className="relative block py-2 no-underline outline-none hover:no-underline h-full"
+                    className="relative block py-2 no-underline outline-none hover:no-underline h-full cursor-pointer"
                   >
                     <div
                       className={`text-sm transition-colors duration-300 ${
@@ -67,7 +68,6 @@ function Header() {
                       {label}
                     </div>
 
-                    {/* Полоска під активним пунктом */}
                     {activeSection === id && (
                       <span className="absolute bottom-0 left-0 w-full h-[2px] bg-white rounded-full transition-all duration-300"></span>
                     )}
