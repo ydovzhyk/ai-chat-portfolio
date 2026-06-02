@@ -85,6 +85,7 @@ import linux from '../app/assets/svg/skills/linux.svg'
 import sqlalchemy from '../app/assets/svg/skills/sqlalchemy.svg'
 import fastapi from '../app/assets/svg/skills/fastapi.svg'
 
+import openai from '../app/assets/svg/skills/openai.svg'
 
 
 export const skillsImage = (skill) => {
@@ -260,6 +261,8 @@ export const skillsImage = (skill) => {
       return sqlalchemy
     case 'fastapi':
       return fastapi
+    case 'openai api':
+      return openai
     default:
       break
   }
