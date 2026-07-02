@@ -5,7 +5,7 @@ export const experiences = [
     company: 'Personal Commercial Product',
     duration: 'mar 2026 - present',
     projects: ['Style Generate AI'],
-    links: ['https://style-generate-ai.vercel.app/'],
+    links: ['https://aistylegenerator.com/'],
     notReady: [''],
   },
   {

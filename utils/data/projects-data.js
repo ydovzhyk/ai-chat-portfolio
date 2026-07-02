@@ -21,7 +21,7 @@ export const projectsData = [
       'Personal commercial AI image generation product built to be monetized. The platform focuses on AI-powered style transformation, portrait generation, and interior visualization. Built end-to-end with a Next.js frontend, Node.js/Express backend, MongoDB, Firebase Storage, OpenAI image generation, visitor/user generation limits, subscription-plan logic, admin tools, gallery saving, and AI usage/cost tracking. Development is ongoing.',
     frontendGitLink: 'https://github.com/ydovzhyk/stylegenerateai',
     backendGitLink: 'https://github.com/ydovzhyk/stylegenerateai-backend',
-    demo: 'https://style-generate-ai.vercel.app/',
+    demo: 'https://aistylegenerator.com/',
     ready: true,
   },
   {

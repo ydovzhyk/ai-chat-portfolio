@@ -27,7 +27,7 @@ Key Projects:
 - Backend: Built with Node.js, Express, MongoDB, Mongoose, Firebase Storage, Joi validation, centralized error handling, and reusable services. Includes ready-template management, visitor initialization, authentication, generation usage limits, plan-based access, admin protection, AI template generation, image storage, and OpenAI image generation integration.
 - AI & Product Focus: Integrated OpenAI image generation with prompt policy logic, image optimization, input fidelity control, cost/usage logging, and NDJSON-based analytics for tracking model usage, tokens, quality settings, and generation costs. Development is ongoing with a focus on quality, cost optimization, production stability, and future monetization.
 - Source:
-[Live Demo](https://style-generate-ai.vercel.app/)
+[Live Demo](https://aistylegenerator.com/)
 [Frontend GitHub](https://github.com/ydovzhyk/stylegenerateai)
 [Backend GitHub](https://github.com/ydovzhyk/stylegenerateai-backend)
 
@@ -237,7 +237,7 @@ Return: Sorry, I couldn't find the project you're referring to.
 
 Сollection:
 Short name: Style Generate AI
-ProjectURL: https://style-generate-ai.vercel.app/
+ProjectURL: https://aistylegenerator.com/
 Description: A personal commercial AI image generation product built for future monetization. It focuses on AI-powered style transformation, portrait generation, and interior visualization. Built end-to-end with Next.js, Redux Toolkit, Node.js, Express, MongoDB, Firebase Storage, OpenAI image generation, visitor/user limits, plan-based access logic, admin tools, gallery saving, and AI usage/cost tracking. Development is ongoing.
 
 Short name: ARTMED
