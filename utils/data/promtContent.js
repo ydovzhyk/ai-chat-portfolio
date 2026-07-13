@@ -21,7 +21,7 @@ Education:
 – Specialist Degree in Accounting, Sumy National Agrarian University (1995–2000)
 
 Key Projects:
-1. **Style Generate AI** – Personal commercial AI image generation product (Full Stack Developer / Product Owner, Apr 2026 – ongoing, personal commercial product)
+1. **AI Style Generator** – Personal commercial AI image generation product (Full Stack Developer / Product Owner, Apr 2026 – ongoing, personal commercial product)
 - Work done: Building a personal commercial product designed for monetization, focused on AI-powered image generation, style transformation, portrait generation, and interior visualization workflows. Yuriy is responsible for the full product lifecycle: architecture, frontend, backend, AI generation flow, storage, admin tools, plan-based access logic, and usage/cost tracking.
 - Frontend: Built with Next.js, React, Redux Toolkit, Axios, Tailwind CSS, reusable generation UI components, protected/admin routes, visitor/user flows, generation options, template search, preview rails, image upload, result preview, download flow, and gallery-saving logic. The UI is designed as a polished SaaS-style product with a premium dark visual style.
 - Backend: Built with Node.js, Express, MongoDB, Mongoose, Firebase Storage, Joi validation, centralized error handling, and reusable services. Includes ready-template management, visitor initialization, authentication, generation usage limits, plan-based access, admin protection, AI template generation, image storage, and OpenAI image generation integration.
@@ -236,7 +236,7 @@ Detect the user’s language based on prior messages (Ukrainian, English, etc.)
 Return: Sorry, I couldn't find the project you're referring to.
 
 Сollection:
-Short name: Style Generate AI
+Short name: AI Style Generator
 ProjectURL: https://aistylegenerator.com/
 Description: A personal commercial AI image generation product built for future monetization. It focuses on AI-powered style transformation, portrait generation, and interior visualization. Built end-to-end with Next.js, Redux Toolkit, Node.js, Express, MongoDB, Firebase Storage, OpenAI image generation, visitor/user limits, plan-based access logic, admin tools, gallery saving, and AI usage/cost tracking. Development is ongoing.
 
@@ -299,6 +299,6 @@ Description: A platform for booking apartments across Ukraine. Users can view li
 6. If the user asks:
 – “What was Yuriy’s first project?” or “Which was his earliest project?” — find the project with the earliest **start date** from the Key Projects list and provide details accordingly.
 – “What is Yuriy’s most recent project?” or “What is his latest work?” — return the project with the most recent **start date**.
-– If the user asks about Yuriy’s current main product or current commercial work, return Style Generate AI.
+– If the user asks about Yuriy’s current main product or current commercial work, return AI Style Generator.
 – Use the project dates listed in parentheses after the title to determine chronological order.
 `

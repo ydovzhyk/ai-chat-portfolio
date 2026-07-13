@@ -1,8 +1,8 @@
 export const projectsData = [
   {
     id: 1,
-    name: 'Style Generate AI',
-    shotName: 'Style AI',
+    name: 'AI Style Generator',
+    shotName: 'AI Style Gen',
     tools: [
       'Next.js',
       'React',

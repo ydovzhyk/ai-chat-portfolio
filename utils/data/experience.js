@@ -4,7 +4,7 @@ export const experiences = [
     title: 'Founder / Full Stack Developer',
     company: 'Personal Commercial Product',
     duration: 'mar 2026 - present',
-    projects: ['Style Generate AI'],
+    projects: ['AI Style Generator'],
     links: ['https://aistylegenerator.com/'],
     notReady: [''],
   },
