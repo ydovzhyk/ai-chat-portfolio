@@ -2,15 +2,11 @@ export const personalData = {
   name: 'Yuriy Dovzhyk',
   profile: '/profile.png',
   designation: 'Full Stack Developer',
-  description: `I’m a Full Stack Developer focused on building reliable, scalable, and user-centric web applications.
+  description: `I build AI-powered digital products that solve real business problems. I enjoy taking ideas from concept to production, combining intuitive user interfaces, scalable backend services, and practical AI integrations into complete solutions.
 
-My main stack includes React, Next.js, Node.js, MongoDB, Firebase, and TypeScript. I also work with AI integrations, real-time features, third-party APIs, and production-ready frontend architecture.
+Over the past 3+ years, I've built commercial web applications and AI-powered products across healthcare, education, e-commerce, SaaS, and business services, with a strong focus on scalable architecture, performance, SEO, and user experience.
 
-Currently, I’m actively building Style Generate AI - my personal commercial AI image generation product focused on style transformation, portrait generation, and interior visualization. This project combines product thinking, full-stack development, OpenAI image generation, usage limits, admin tools, storage, and cost optimization.
-
-What drives me is turning ideas into clean, effective solutions that make a real difference. I enjoy solving technical challenges and crafting products that people enjoy using.
-
-If you're looking for someone who takes ownership, thinks critically, and codes with purpose - let’s connect and build something meaningful.`,
+I enjoy solving complex engineering challenges and building software that delivers real value to users and businesses. If you're looking for someone who takes ownership and enjoys building products end-to-end, I'd love to connect.`,
   email: 'ydovzhyk@gmail.com',
   phone: '+380503562938',
   address: 'Kyiv, Ukraine',
@@ -22,5 +18,5 @@ If you're looking for someone who takes ownership, thinks critically, and codes 
   leetcode: '',
   devUsername: 'ydovzhyk',
   resume:
-    'https://drive.google.com/file/d/1c2rApnN558jvZG5U3mxXYMtEzq8jv7iG/view?usp=sharing',
+    'https://drive.google.com/file/d/1xMA-oXSaKMEiTZjflqrJPnFCUCEH2x7Z/view?usp=sharing',
 }
