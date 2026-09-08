@@ -103,7 +103,7 @@ export const projectsData = [
       'A real-time voice translation app built as a personal project. The client side uses WebSockets for low-latency audio streaming and receives real-time transcription and translation. Users can save recordings, transcriptions, and translations. The backend integrates Deepgram SDK for speech-to-text and OpenAI GPT-4 for multilingual translation. Development of the app is ongoing.',
     frontendGitLink: 'https://github.com/ydovzhyk/SpeakFlow',
     backendGitLink: 'https://github.com/ydovzhyk/test-task-backend',
-    demo: 'https://speakflow.space/',
+    demo: 'https://speakflow.art/',
     ready: true,
   },
   {

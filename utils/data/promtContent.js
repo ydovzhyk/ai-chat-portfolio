@@ -72,7 +72,7 @@ Additional Contributions: Achieved a PageSpeed Insights score averaging 98%, sig
 - Backend: Created with Node.js and Express, using MongoDB for persistent storage. Integrated the Deepgram SDK for fast and accurate speech-to-text transcription and OpenAI GPT-4 for high-quality translations. Used JWT for secure authentication and bcrypt for password encryption. APIs were developed for user session management and saving translation history.
 - Innovations: Enabled automatic detection and dynamic switching between audio sources (microphone and system output). WebSocket implementation ensures continuous real-time data flow with minimal delay.
 - Source:
-[Live Demo](https://speakflow.space/)
+[Live Demo](https://speakflow.art/)
 [Frontend GitHub](https://github.com/ydovzhyk/SpeakFlow)
 [Backend GitHub](https://github.com/ydovzhyk/test-task-backend)
 
@@ -257,7 +257,7 @@ ProjectURL: https://bluehouse-bb.netlify.app
 Description: A modernized and SEO-optimized website for a rental business in Reykjavik. Delivered improved user experience, added booking and payment features, and aligned fully with the company’s brand and design. The updated site was approved and published by the company owner.
 
 Short name: SpeakFlow
-ProjectURL: https://speakflow.space/
+ProjectURL: https://speakflow.art/
 Description: A real-time AI-driven voice translation app that allows users to stream audio and receive immediate transcriptions and translations. Supports saving session history and transcripts. Built for performance, scalability, and accessibility. Development is ongoing with continued feature expansion.
 
 Short name: Middle Way

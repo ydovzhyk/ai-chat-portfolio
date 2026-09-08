@@ -127,7 +127,7 @@ function HeroSection() {
             </div>
             <Link
               href={personalData.resume}
-              target="_blank"
+              download="YDovzhyk_Resume.pdf"
               className="group bg-gradient-to-r from-violet-600 to-pink-500 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
             >
               <div className="flex items-center gap-1 hover:gap-3 px-3 md:px-8 py-3 md:py-4 rounded-full border-none text-xs md:text-sm font-medium uppercase tracking-wider transition-all duration-200 ease-out md:font-semibold bg-[#0d1224] text-white group-hover:bg-transparent group-hover:text-white w-full text-center">

@@ -37,7 +37,7 @@ export const experiences = [
     company: 'Self-initiated AI Product',
     duration: 'sep 2024 - present',
     projects: ['SpeakFlow'],
-    links: ['https://speakflow.space/'],
+    links: ['https://speakflow.art/'],
     notReady: [''],
   },
   {

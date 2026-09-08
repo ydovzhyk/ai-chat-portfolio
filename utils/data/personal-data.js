@@ -17,6 +17,5 @@ I enjoy solving complex engineering challenges and building software that delive
   stackOverflow: '',
   leetcode: '',
   devUsername: 'ydovzhyk',
-  resume:
-    'https://drive.google.com/file/d/1xMA-oXSaKMEiTZjflqrJPnFCUCEH2x7Z/view?usp=sharing',
+  resume: '/resume/YDovzhyk_Resume.pdf',
 }
