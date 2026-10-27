@@ -46,6 +46,7 @@ Key Projects:
 - Media & Infrastructure: Integrated Firebase Storage for video assets, FFmpeg for transcoding multiple video qualities, Multer for uploads, and Redis/BullMQ is planned for higher-load background processing.
 - Engineering Focus: The project emphasizes architecture quality, real-world state management, media handling, playback continuity, queue logic, personalized recommendations, and production-like backend patterns rather than just basic CRUD functionality.
 - Source:
+[Live Demo](https://mytube-two-phi.vercel.app/)
 [Frontend GitHub](https://github.com/ydovzhyk/mytube)
 [Backend GitHub](https://github.com/ydovzhyk/mytube-backend)
 
@@ -245,7 +246,7 @@ ProjectURL: https://artmed.live/
 Description: A production frontend website for a medical clinic in Platja d’Aro, Spain. Built from scratch with Next.js, React, Tailwind CSS, Framer Motion, responsive service sections, contact actions, Google Maps integration, SEO metadata, sitemap, robots file, and Vercel deployment.
 
 Short name: MyTube
-ProjectURL: https://github.com/ydovzhyk/mytube
+ProjectURL: https://mytube-two-phi.vercel.app/
 Description: A YouTube-inspired full-stack video platform built as a long-term personal project. Focused on scalable architecture, video upload and transcoding, JWT auth with refresh flow, playlists, comments, channel pages, personalized recommendations, and advanced player UX. Built with Next.js, Redux Toolkit, Node.js, Express, MongoDB, Firebase Storage, and FFmpeg. Development is ongoing.
 
 Short name: PinkSkirt

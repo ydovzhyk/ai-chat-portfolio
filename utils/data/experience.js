@@ -55,7 +55,7 @@ export const experiences = [
       'Event Booster',
     ],
     links: [
-      '',
+      'https://mytube-two-phi.vercel.app/',
       'https://bookingapart.netlify.app/',
       'https://easy-shop-team.netlify.app/',
       'https://notes-organiser-yd.netlify.app/',
@@ -63,6 +63,6 @@ export const experiences = [
       'https://ydovzhyk.github.io/frontend-kapusta-dev/',
       'https://ydovzhyk.github.io/eventbooster_team_project/',
     ],
-    notReady: ['MyTube', 'Booking Apartment'],
+    notReady: ['Booking Apartment'],
   },
 ]
