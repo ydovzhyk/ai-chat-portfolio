@@ -8,7 +8,7 @@ import {
 import { openai } from '@ai-sdk/openai'
 import { z } from 'zod'
 import Exa from 'exa-js'
-import FirecrawlApp from '@mendable/firecrawl-js'
+import Firecrawl from '@mendable/firecrawl-js'
 import MemoryClient from 'mem0ai'
 import { promtGeneralSearch } from '../../../utils/data/promtGeneralSearch'
 import { promtFilterMemo } from '../../../utils/data/promtFilterMemo'
@@ -17,7 +17,7 @@ export const runtime = 'edge'
 
 const exa = new Exa(process.env.EXA_API_KEY)
 const mem0 = new MemoryClient({ apiKey: process.env.MEM0_API_KEY })
-const firecrawlApp = new FirecrawlApp({
+const firecrawlApp = new Firecrawl({
   apiKey: process.env.FIRECRAWL_API_KEY,
 })
 
@@ -153,13 +153,9 @@ export async function POST(req) {
         }),
         execute: async ({ url }) => {
           try {
-            const result = await firecrawlApp.scrapeUrl(url, {
+            const result = await firecrawlApp.scrape(url, {
               formats: ['markdown'],
             })
-
-            if (!result.success) {
-              throw new Error(`Failed to scrape: ${result.error}`)
-            }
 
             // console.log('🔥 Firecrawl SDK result:', JSON.stringify(result, null, 2))
             return JSON.stringify(result, null, 2)

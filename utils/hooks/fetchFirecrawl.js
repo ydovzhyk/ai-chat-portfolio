@@ -1,6 +1,6 @@
 async function fetchFirecrawl(url) {
   try {
-    const res = await fetch('https://api.firecrawl.dev/v1/crawl', {
+    const res = await fetch('https://api.firecrawl.dev/v2/scrape', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -8,14 +8,12 @@ async function fetchFirecrawl(url) {
       },
       body: JSON.stringify({
         url,
-        include_html: false,
-        include_text: true,
-        include_headers: true,
+        formats: ['markdown'],
       }),
     })
 
     const data = await res.json()
-    return data.text || ''
+    return data?.data?.markdown || data?.markdown || ''
   } catch (e) {
     console.error('❌ Firecrawl error:', e)
     return ''

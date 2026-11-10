@@ -189,9 +189,9 @@ export async function POST(req) {
     const firecrawlContents = await Promise.all(
       uniqueUrls.map(async (r) => {
         return safeService(
-          'firecrawl.crawl',
+          'firecrawl.scrape',
           fetchJson(
-            'https://api.firecrawl.dev/v1/crawl',
+            'https://api.firecrawl.dev/v2/scrape',
             {
               method: 'POST',
               headers: {
@@ -200,17 +200,18 @@ export async function POST(req) {
               },
               body: JSON.stringify({
                 url: r.url,
-                include_text: true,
-                include_html: false,
-                include_headers: true,
+                formats: ['markdown'],
               }),
             },
             'Firecrawl',
-          ).then((data) => ({
-            url: r.url,
-            title: r.title,
-            text: data.text?.slice(0, 3000) || '[NO TEXT]',
-          })),
+          ).then((data) => {
+            const markdown = data?.data?.markdown || data?.markdown || ''
+            return {
+              url: r.url,
+              title: r.title,
+              text: markdown.slice(0, 3000) || '[NO TEXT]',
+            }
+          }),
           {
             url: r.url,
             title: r.title,
