@@ -8,7 +8,6 @@ import {
 import { openai } from '@ai-sdk/openai'
 import { z } from 'zod'
 import Exa from 'exa-js'
-import Firecrawl from '@mendable/firecrawl-js'
 import MemoryClient from 'mem0ai'
 import { promtGeneralSearch } from '../../../utils/data/promtGeneralSearch'
 import { promtFilterMemo } from '../../../utils/data/promtFilterMemo'
@@ -17,9 +16,30 @@ export const runtime = 'edge'
 
 const exa = new Exa(process.env.EXA_API_KEY)
 const mem0 = new MemoryClient({ apiKey: process.env.MEM0_API_KEY })
-const firecrawlApp = new Firecrawl({
-  apiKey: process.env.FIRECRAWL_API_KEY,
-})
+
+async function scrapeWithFirecrawl(url) {
+  const res = await fetch('https://api.firecrawl.dev/v2/scrape', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.FIRECRAWL_API_KEY}`,
+    },
+    body: JSON.stringify({
+      url,
+      formats: ['markdown'],
+    }),
+  })
+
+  const data = await res.json().catch(() => null)
+
+  if (!res.ok) {
+    throw new Error(
+      `Firecrawl HTTP ${res.status}: ${JSON.stringify(data)}`,
+    )
+  }
+
+  return data
+}
 
 async function filterMemory(prompt, memoryResults) {
   const messages = [
@@ -147,20 +167,16 @@ export async function POST(req) {
       }),
       tool({
         name: 'retrieve_url',
-        description: 'Extract full content from a URL using Firecrawl SDK.',
+        description: 'Extract full content from a URL using Firecrawl.',
         parameters: z.object({
           url: z.string().describe('The full URL to extract content from.'),
         }),
         execute: async ({ url }) => {
           try {
-            const result = await firecrawlApp.scrape(url, {
-              formats: ['markdown'],
-            })
-
-            // console.log('🔥 Firecrawl SDK result:', JSON.stringify(result, null, 2))
+            const result = await scrapeWithFirecrawl(url)
             return JSON.stringify(result, null, 2)
           } catch (e) {
-            console.error('❌ Firecrawl SDK error:', e.message || e)
+            console.error('❌ Firecrawl error:', e.message || e)
             return `Error scraping content: ${e.message || e}`
           }
         },
